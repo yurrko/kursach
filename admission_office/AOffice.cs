@@ -8,6 +8,17 @@ namespace admission_office
 {
     class AOffice
     {
+        private static AOffice _instance;
+
+        public static AOffice Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new AOffice();
+                return _instance;
+            }
+        }
+
         public bool Create_entrant( string firstName, string lastName, string middleName, string birthDate, List<Exam> list )
         {
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
@@ -30,6 +41,44 @@ namespace admission_office
                     cmd.Parameters.AddWithValue( "@id_entrant", lastId );
                     cmd.Parameters.AddWithValue( "@id_subject", l.Id );
                     cmd.Parameters.AddWithValue( "@result", l.Result );
+                    cmd.ExecuteNonQuery();
+                }
+                connection.Close();
+                return true;
+            }
+        }
+
+        public bool Create_speciality(string specName, int eduForm, int numOfFree,  int numOfPaid, List<Exam> list )
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString.Connection))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = 
+                    "INSERT INTO `admission_office`.`speciality` (`speciality`) VALUES( @specName )";
+                cmd.Parameters.AddWithValue( "@specName", specName );
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "SELECT @@IDENTITY";
+                int lastId = Convert.ToInt32( cmd.ExecuteScalar() );
+                cmd.CommandText = 
+                    "INSERT INTO `admission_office`.`education` (`id_speciality`, `id_education_form`, `num_of_free_places`, `num_of_paid_places`) VALUES( @id_speciality, @id_education_from, @num_of_free, @num_of_paid)";
+                cmd.Parameters.AddWithValue( "@id_speciality", lastId );
+                cmd.Parameters.AddWithValue( "@id_education_from", eduForm );
+                cmd.Parameters.AddWithValue( "@num_of_free", numOfFree );
+                cmd.Parameters.AddWithValue( "@num_of_paid", numOfPaid );
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "SELECT @@IDENTITY";
+                lastId = Convert.ToInt32( cmd.ExecuteScalar() );
+                cmd.CommandText =
+                    "INSERT INTO `admission_office`.`requirement` (`id_education`, `id_subject`, `min_requirement`) VALUES (@id_education, @id_subject, @min_requirement)";
+                foreach (var l in list)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue( "@id_education", lastId );
+                    cmd.Parameters.AddWithValue( "@id_subject", l.Id );
+                    cmd.Parameters.AddWithValue( "@min_requirement", l.Result );
                     cmd.ExecuteNonQuery();
                 }
                 connection.Close();

@@ -28,16 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbExamRes3 = new System.Windows.Forms.TextBox();
-            this.tbExamRes2 = new System.Windows.Forms.TextBox();
-            this.tbExamRes1 = new System.Windows.Forms.TextBox();
-            this.lblExam3 = new System.Windows.Forms.Label();
-            this.lblExam2 = new System.Windows.Forms.Label();
-            this.cbExam3 = new System.Windows.Forms.ComboBox();
-            this.cbExam2 = new System.Windows.Forms.ComboBox();
-            this.cbExam1 = new System.Windows.Forms.ComboBox();
             this.dtpBirthdate = new System.Windows.Forms.DateTimePicker();
-            this.lblExam1 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblBirthDate = new System.Windows.Forms.Label();
             this.lblMidName = new System.Windows.Forms.Label();
@@ -46,73 +37,10 @@
             this.tbMiddleName = new System.Windows.Forms.TextBox();
             this.tbFirstName = new System.Windows.Forms.TextBox();
             this.tbLastname = new System.Windows.Forms.TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
-            // 
-            // tbExamRes3
-            // 
-            this.tbExamRes3.Location = new System.Drawing.Point(310, 144);
-            this.tbExamRes3.Name = "tbExamRes3";
-            this.tbExamRes3.Size = new System.Drawing.Size(57, 22);
-            this.tbExamRes3.TabIndex = 36;
-            this.tbExamRes3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbExamRes3_KeyPress);
-            // 
-            // tbExamRes2
-            // 
-            this.tbExamRes2.Location = new System.Drawing.Point(310, 89);
-            this.tbExamRes2.Name = "tbExamRes2";
-            this.tbExamRes2.Size = new System.Drawing.Size(57, 22);
-            this.tbExamRes2.TabIndex = 35;
-            this.tbExamRes2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbExamRes2_KeyPress);
-            // 
-            // tbExamRes1
-            // 
-            this.tbExamRes1.Location = new System.Drawing.Point(310, 33);
-            this.tbExamRes1.Name = "tbExamRes1";
-            this.tbExamRes1.Size = new System.Drawing.Size(57, 22);
-            this.tbExamRes1.TabIndex = 34;
-            this.tbExamRes1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbExamRes1_KeyPress);
-            // 
-            // lblExam3
-            // 
-            this.lblExam3.AutoSize = true;
-            this.lblExam3.Location = new System.Drawing.Point(164, 118);
-            this.lblExam3.Name = "lblExam3";
-            this.lblExam3.Size = new System.Drawing.Size(76, 17);
-            this.lblExam3.TabIndex = 33;
-            this.lblExam3.Text = "Экзамен 3";
-            // 
-            // lblExam2
-            // 
-            this.lblExam2.AutoSize = true;
-            this.lblExam2.Location = new System.Drawing.Point(164, 66);
-            this.lblExam2.Name = "lblExam2";
-            this.lblExam2.Size = new System.Drawing.Size(76, 17);
-            this.lblExam2.TabIndex = 32;
-            this.lblExam2.Text = "Экзамен 2";
-            // 
-            // cbExam3
-            // 
-            this.cbExam3.FormattingEnabled = true;
-            this.cbExam3.Location = new System.Drawing.Point(167, 144);
-            this.cbExam3.Name = "cbExam3";
-            this.cbExam3.Size = new System.Drawing.Size(121, 24);
-            this.cbExam3.TabIndex = 31;
-            // 
-            // cbExam2
-            // 
-            this.cbExam2.FormattingEnabled = true;
-            this.cbExam2.Location = new System.Drawing.Point(167, 89);
-            this.cbExam2.Name = "cbExam2";
-            this.cbExam2.Size = new System.Drawing.Size(121, 24);
-            this.cbExam2.TabIndex = 30;
-            // 
-            // cbExam1
-            // 
-            this.cbExam1.FormattingEnabled = true;
-            this.cbExam1.Location = new System.Drawing.Point(167, 33);
-            this.cbExam1.Name = "cbExam1";
-            this.cbExam1.Size = new System.Drawing.Size(121, 24);
-            this.cbExam1.TabIndex = 29;
             // 
             // dtpBirthdate
             // 
@@ -122,15 +50,6 @@
             this.dtpBirthdate.Name = "dtpBirthdate";
             this.dtpBirthdate.Size = new System.Drawing.Size(116, 22);
             this.dtpBirthdate.TabIndex = 28;
-            // 
-            // lblExam1
-            // 
-            this.lblExam1.AutoSize = true;
-            this.lblExam1.Location = new System.Drawing.Point(164, 10);
-            this.lblExam1.Name = "lblExam1";
-            this.lblExam1.Size = new System.Drawing.Size(76, 17);
-            this.lblExam1.TabIndex = 27;
-            this.lblExam1.Text = "Экзамен 1";
             // 
             // btnSave
             // 
@@ -199,20 +118,35 @@
             this.tbLastname.Size = new System.Drawing.Size(100, 22);
             this.tbLastname.TabIndex = 19;
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(169, 10);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 45);
+            this.panel1.TabIndex = 37;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(169, 66);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 45);
+            this.panel2.TabIndex = 38;
+            // 
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(169, 121);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 45);
+            this.panel3.TabIndex = 39;
+            // 
             // NewEntrant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tbExamRes3);
-            this.Controls.Add(this.tbExamRes2);
-            this.Controls.Add(this.tbExamRes1);
-            this.Controls.Add(this.lblExam3);
-            this.Controls.Add(this.lblExam2);
-            this.Controls.Add(this.cbExam3);
-            this.Controls.Add(this.cbExam2);
-            this.Controls.Add(this.cbExam1);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.dtpBirthdate);
-            this.Controls.Add(this.lblExam1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblBirthDate);
             this.Controls.Add(this.lblMidName);
@@ -229,17 +163,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox tbExamRes3;
-        private System.Windows.Forms.TextBox tbExamRes2;
-        private System.Windows.Forms.TextBox tbExamRes1;
-        private System.Windows.Forms.Label lblExam3;
-        private System.Windows.Forms.Label lblExam2;
-        private System.Windows.Forms.ComboBox cbExam3;
-        private System.Windows.Forms.ComboBox cbExam2;
-        private System.Windows.Forms.ComboBox cbExam1;
         private System.Windows.Forms.DateTimePicker dtpBirthdate;
-        private System.Windows.Forms.Label lblExam1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblBirthDate;
         private System.Windows.Forms.Label lblMidName;
@@ -248,5 +172,8 @@
         private System.Windows.Forms.TextBox tbMiddleName;
         private System.Windows.Forms.TextBox tbFirstName;
         private System.Windows.Forms.TextBox tbLastname;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
     }
 }

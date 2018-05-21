@@ -10,7 +10,7 @@ namespace admission_office
         public Form1()
         {
             InitializeComponent();
-            Text = @"Авторизация";
+            Text = "Авторизация";
             ConnectionString.Connection = _connStr[0];
             cbSelectDB.SelectedIndex = 0;
         }
@@ -50,6 +50,11 @@ namespace admission_office
         private void cbSelectDB_SelectedIndexChanged( object sender, EventArgs e )
         {
             ConnectionString.Connection = _connStr[cbSelectDB.SelectedIndex];
+        }
+
+        private void Form1_Load( object sender, EventArgs e )
+        {
+            tbLogin.Select();
         }
     }
 }
