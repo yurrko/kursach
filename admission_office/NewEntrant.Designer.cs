@@ -54,6 +54,7 @@
             this.tbExamRes3.Name = "tbExamRes3";
             this.tbExamRes3.Size = new System.Drawing.Size(57, 22);
             this.tbExamRes3.TabIndex = 36;
+            this.tbExamRes3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbExamRes3_KeyPress);
             // 
             // tbExamRes2
             // 
@@ -61,6 +62,7 @@
             this.tbExamRes2.Name = "tbExamRes2";
             this.tbExamRes2.Size = new System.Drawing.Size(57, 22);
             this.tbExamRes2.TabIndex = 35;
+            this.tbExamRes2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbExamRes2_KeyPress);
             // 
             // tbExamRes1
             // 
@@ -68,6 +70,7 @@
             this.tbExamRes1.Name = "tbExamRes1";
             this.tbExamRes1.Size = new System.Drawing.Size(57, 22);
             this.tbExamRes1.TabIndex = 34;
+            this.tbExamRes1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbExamRes1_KeyPress);
             // 
             // lblExam3
             // 
@@ -137,6 +140,7 @@
             this.btnSave.TabIndex = 26;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lblBirthDate
             // 
