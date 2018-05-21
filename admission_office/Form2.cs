@@ -17,5 +17,15 @@ namespace admission_office
         {
             Application.Exit();
         }
+
+        private void создатьToolStripMenuItem_Click( object sender, System.EventArgs e )
+        {
+            if (!panel.Controls.Contains(NewEntrant.Instance))
+            {
+                panel.Controls.Add(NewEntrant.Instance);
+                NewEntrant.Instance.Dock = DockStyle.Fill;
+            }
+            NewEntrant.Instance.BringToFront();
+        }
     }
 }
