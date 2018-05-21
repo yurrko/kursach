@@ -18,42 +18,54 @@ namespace admission_office
                 return _instance;
             }
         }
+
         AOffice _admOffice = new AOffice();
+        TextBoxExams ucExam1 = new TextBoxExams( "1" );
+        TextBoxExams ucExam2 = new TextBoxExams( "2" );
+        TextBoxExams ucExam3 = new TextBoxExams( "3" );
+
         public NewEntrant()
         {
             InitializeComponent();
-            FillComboBox();
+            panel1.Controls.Add(ucExam1);
+            panel2.Controls.Add(ucExam2);
+            panel3.Controls.Add(ucExam3);
+            ucExam1.Dock = DockStyle.Fill;
+            ucExam2.Dock = DockStyle.Fill;
+            ucExam3.Dock = DockStyle.Fill;
         }
 
-        private void btnSave_Click( object sender, EventArgs e )
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (tbFirstName.Text.Length == 0
                 || tbLastname.Text.Length == 0
-                || cbExam1.SelectedIndex != -1
-                || cbExam2.SelectedIndex != -1
-                || cbExam2.SelectedIndex != -1
-                || tbExamRes1.Text.Length == 0
-                || tbExamRes2.Text.Length == 0
-                || tbExamRes3.Text.Length == 0
+                || ucExam1.CbExam.SelectedIndex == -1
+                || ucExam2.CbExam.SelectedIndex == -1
+                || ucExam3.CbExam.SelectedIndex == -1
+                || ucExam1.TbExamRes.Text.Length == 0
+                || ucExam2.TbExamRes.Text.Length == 0
+                || ucExam3.TbExamRes.Text.Length == 0
             )
             {
-                MessageBox.Show( "Заполните все обязательные поля", "Ошибка" );
+                MessageBox.Show("Заполните все обязательные поля", "Ошибка");
             }
             else
             {
-                if (cbExam1.SelectedIndex == cbExam2.SelectedIndex
-                    || cbExam1.SelectedIndex == cbExam3.SelectedIndex
-                    || cbExam2.SelectedIndex == cbExam2.SelectedIndex)
+                if (ucExam1.CbExam.SelectedIndex == ucExam2.CbExam.SelectedIndex
+                    || ucExam1.CbExam.SelectedIndex == ucExam3.CbExam.SelectedIndex
+                    || ucExam2.CbExam.SelectedIndex == ucExam3.CbExam.SelectedIndex)
                 {
                     MessageBox.Show( "Выберите различные экзамены", "Ошибка" );
                 }
                 else
                 {
-                    List<Exam> list = new List<Exam>() {
-                        new Exam(cbExam1.SelectedIndex+1,int.Parse(tbExamRes1.Text)),
-                        new Exam(cbExam2.SelectedIndex+1,int.Parse(tbExamRes2.Text)),
-                        new Exam(cbExam3.SelectedIndex+1,int.Parse(tbExamRes3.Text))};
-                    if (_admOffice.Create_entrant( tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list )) Clear();
+                    List<Exam> list = new List<Exam>()
+                {
+                    new Exam(ucExam1.CbExam.SelectedIndex + 1, int.Parse(ucExam1.TbExamRes.Text)),
+                    new Exam(ucExam2.CbExam.SelectedIndex + 1, int.Parse(ucExam2.TbExamRes.Text)),
+                    new Exam(ucExam3.CbExam.SelectedIndex + 1, int.Parse(ucExam3.TbExamRes.Text))
+                };
+                if (_admOffice.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list)) Clear();
                 }
             }
         }
@@ -64,73 +76,12 @@ namespace admission_office
             tbMiddleName.Text = "";
             tbLastname.Text = "";
             dtpBirthdate.Text = "";
-        }
-
-        private void FillComboBox()
-        {
-            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                connection.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
-                cmd.CommandText = "SELECT subject FROM admission_office.subject ORDER BY id";
-                cmd.ExecuteNonQuery();
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
-                DataTable dt = new DataTable();
-                dataAdapter.Fill( dt );
-
-                DataRow[] myData = dt.Select();
-                foreach (var t in myData)
-                {
-                    for (int j = 0; j < t.ItemArray.Length; j++)
-                    {
-                        cbExam1.Items.Add( t.ItemArray[j] + "" );
-                        cbExam2.Items.Add( t.ItemArray[j] + "" );
-                        cbExam3.Items.Add( t.ItemArray[j] + "" );
-                    }
-                }
-                connection.Close();
-            }
-        }
-
-        private bool Check_tb( KeyPressEventArgs e, string value )
-        {
-            char number = e.KeyChar;
-            if (number == 8) return true;
-            if (Char.IsDigit( number ))
-            {
-                if (value.Length != 0)
-                {
-                    return (int.Parse( value ) * 10 + int.Parse( number.ToString() )) <= 100;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        private void tbExamRes1_KeyPress( object sender, KeyPressEventArgs e )
-        {
-            if (!Check_tb( e, tbExamRes1.Text ))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void tbExamRes2_KeyPress( object sender, KeyPressEventArgs e )
-        {
-            if (!Check_tb( e, tbExamRes2.Text ))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void tbExamRes3_KeyPress( object sender, KeyPressEventArgs e )
-        {
-            if (!Check_tb( e, tbExamRes3.Text ))
-            {
-                e.Handled = true;
-            }
+            ucExam1.CbExam.SelectedIndex = -1;
+            ucExam2.CbExam.SelectedIndex = -1;
+            ucExam3.CbExam.SelectedIndex = -1;
+            ucExam1.TbExamRes.Text = "";
+            ucExam2.TbExamRes.Text = "";
+            ucExam3.TbExamRes.Text = "";
         }
     }
 }

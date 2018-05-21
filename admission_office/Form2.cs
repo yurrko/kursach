@@ -9,10 +9,6 @@ namespace admission_office
             InitializeComponent();
         }
 
-        private void button1_Click( object sender, System.EventArgs e )
-        {
-        }
-
         private void выходToolStripMenuItem_Click( object sender, System.EventArgs e )
         {
             Application.Exit();
