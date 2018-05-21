@@ -34,11 +34,6 @@ namespace admission_office
             Speciality.Instance.BringToFront();
         }
 
-        private void Form2_FormClosed( object sender, FormClosedEventArgs e )
-        {
-            Application.Exit();
-        }
-
         private void создатьToolStripMenuItem2_Click( object sender, System.EventArgs e )
         {
             if (!panel.Controls.Contains( Subject.Instance ))
@@ -46,7 +41,12 @@ namespace admission_office
                 panel.Controls.Add( Subject.Instance );
                 Subject.Instance.Dock = DockStyle.Fill;
             }
-            Speciality.Instance.BringToFront();
+            Subject.Instance.BringToFront();
+        }
+
+        private void Form2_FormClosed( object sender, FormClosedEventArgs e )
+        {
+            Application.Exit();
         }
     }
 }
