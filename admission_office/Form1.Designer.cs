@@ -92,6 +92,7 @@
             // 
             // cbSelectDB
             // 
+            this.cbSelectDB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSelectDB.Items.AddRange(new object[] {
             "Продуктивная БД",
             "Архивная БД"});

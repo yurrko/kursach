@@ -152,6 +152,7 @@
             // 
             // cbSpec
             // 
+            this.cbSpec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSpec.FormattingEnabled = true;
             this.cbSpec.Location = new System.Drawing.Point(169, 209);
             this.cbSpec.Name = "cbSpec";

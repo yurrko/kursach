@@ -43,6 +43,7 @@
             // 
             // cbExam
             // 
+            this.cbExam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbExam.FormattingEnabled = true;
             this.cbExam.Location = new System.Drawing.Point(3, 23);
             this.cbExam.Name = "cbExam";
