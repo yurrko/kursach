@@ -76,6 +76,12 @@
     <Compile Include="Speciality.Designer.cs">
       <DependentUpon>Speciality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Subject.Designer.cs">
+      <DependentUpon>Subject.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextBoxExams.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </Compile>
     <EmbeddedResource Include="Speciality.resx">
       <DependentUpon>Speciality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Subject.resx">
+      <DependentUpon>Subject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextBoxExams.resx">
       <DependentUpon>TextBoxExams.cs</DependentUpon>

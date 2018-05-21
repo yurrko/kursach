@@ -85,5 +85,21 @@ namespace admission_office
                 return true;
             }
         }
+
+        public bool Create_subject(string subjName)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnectionString.Connection))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = "INSERT INTO `admission_office`.`subject` (`subject`) VALUES (@subject)";
+                cmd.Parameters.AddWithValue( "@subject", subjName );
+                cmd.ExecuteNonQuery();
+                connection.Close();
+                return true;
+            }
+        }
     }
 }
