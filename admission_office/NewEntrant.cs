@@ -18,8 +18,6 @@ namespace admission_office
                 return _instance;
             }
         }
-
-        //AOffice _admOffice = new AOffice();
         TextBoxExams ucExam1 = new TextBoxExams( "1" );
         TextBoxExams ucExam2 = new TextBoxExams( "2" );
         TextBoxExams ucExam3 = new TextBoxExams( "3" );
@@ -76,12 +74,9 @@ namespace admission_office
             tbMiddleName.Text = "";
             tbLastname.Text = "";
             dtpBirthdate.Text = "";
-            ucExam1.CbExam.SelectedIndex = -1;
-            ucExam2.CbExam.SelectedIndex = -1;
-            ucExam3.CbExam.SelectedIndex = -1;
-            ucExam1.TbExamRes.Text = "";
-            ucExam2.TbExamRes.Text = "";
-            ucExam3.TbExamRes.Text = "";
+            ucExam1.Clear();
+            ucExam2.Clear();
+            ucExam3.Clear();
         }
     }
 }

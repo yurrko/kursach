@@ -72,12 +72,9 @@ namespace admission_office
             tbSpec.Text = "";
             mtbFree.Text = "";
             mtbPaid.Text = "";
-            ucExam1.CbExam.SelectedIndex = -1;
-            ucExam2.CbExam.SelectedIndex = -1;
-            ucExam3.CbExam.SelectedIndex = -1;
-            ucExam1.TbExamRes.Text = "";
-            ucExam2.TbExamRes.Text = "";
-            ucExam3.TbExamRes.Text = "";
+            ucExam1.Clear();
+            ucExam2.Clear();
+            ucExam3.Clear();
         }
     }
 }

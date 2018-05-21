@@ -72,5 +72,11 @@ namespace admission_office
                 e.Handled = true;
             }
         }
+
+        public void Clear()
+        {
+            cbExam.SelectedIndex = -1;
+            tbExamRes.Text = "";
+        }
     }
 }
