@@ -76,7 +76,7 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
             this.создатьToolStripMenuItem.Text = "Создать";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
@@ -93,6 +93,7 @@
             this.создатьToolStripMenuItem1.Name = "создатьToolStripMenuItem1";
             this.создатьToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
             this.создатьToolStripMenuItem1.Text = "Создать";
+            this.создатьToolStripMenuItem1.Click += new System.EventHandler(this.создатьToolStripMenuItem1_Click);
             // 
             // экзаменыToolStripMenuItem
             // 
@@ -105,7 +106,7 @@
             // создатьToolStripMenuItem2
             // 
             this.создатьToolStripMenuItem2.Name = "создатьToolStripMenuItem2";
-            this.создатьToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
+            this.создатьToolStripMenuItem2.Size = new System.Drawing.Size(139, 26);
             this.создатьToolStripMenuItem2.Text = "Создать";
             // 
             // toolStripSeparator1

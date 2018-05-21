@@ -23,5 +23,15 @@ namespace admission_office
             }
             NewEntrant.Instance.BringToFront();
         }
+
+        private void создатьToolStripMenuItem1_Click( object sender, System.EventArgs e )
+        {
+            if (!panel.Controls.Contains( Speciality.Instance ))
+            {
+                panel.Controls.Add( Speciality.Instance );
+                Speciality.Instance.Dock = DockStyle.Fill;
+            }
+            Speciality.Instance.BringToFront();
+        }
     }
 }

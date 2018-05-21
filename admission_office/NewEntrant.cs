@@ -19,7 +19,7 @@ namespace admission_office
             }
         }
 
-        AOffice _admOffice = new AOffice();
+        //AOffice _admOffice = new AOffice();
         TextBoxExams ucExam1 = new TextBoxExams( "1" );
         TextBoxExams ucExam2 = new TextBoxExams( "2" );
         TextBoxExams ucExam3 = new TextBoxExams( "3" );
@@ -65,7 +65,7 @@ namespace admission_office
                     new Exam(ucExam2.CbExam.SelectedIndex + 1, int.Parse(ucExam2.TbExamRes.Text)),
                     new Exam(ucExam3.CbExam.SelectedIndex + 1, int.Parse(ucExam3.TbExamRes.Text))
                 };
-                if (_admOffice.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list)) Clear();
+                if (AOffice.Instance.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list)) Clear();
                 }
             }
         }
