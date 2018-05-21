@@ -101,16 +101,20 @@
             // mtbFree
             // 
             this.mtbFree.Location = new System.Drawing.Point(4, 111);
+            this.mtbFree.Mask = "00";
             this.mtbFree.Name = "mtbFree";
             this.mtbFree.Size = new System.Drawing.Size(100, 22);
             this.mtbFree.TabIndex = 47;
+            this.mtbFree.ValidatingType = typeof(int);
             // 
             // mtbPaid
             // 
             this.mtbPaid.Location = new System.Drawing.Point(4, 164);
+            this.mtbPaid.Mask = "00";
             this.mtbPaid.Name = "mtbPaid";
             this.mtbPaid.Size = new System.Drawing.Size(100, 22);
             this.mtbPaid.TabIndex = 48;
+            this.mtbPaid.ValidatingType = typeof(int);
             // 
             // lblNumOfFree
             // 
