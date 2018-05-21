@@ -8,6 +8,16 @@ namespace admission_office
 {
     public partial class NewEntrant : UserControl
     {
+        private static NewEntrant _instance;
+
+        public static NewEntrant Instance
+        {
+            get
+            {
+                if (_instance == null) _instance = new NewEntrant();
+                return _instance;
+            }
+        }
         AOffice _admOffice = new AOffice();
         public NewEntrant()
         {
