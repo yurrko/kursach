@@ -16,13 +16,8 @@ namespace admission_office
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault( false );
-            
-            var authorizeForm = new Form1();
-            authorizeForm.ShowDialog();
-            Application.Run();
-            //Application.Run( new Form1() );
-            //Application.EnableVisualStyles();
-            //Application.Run( new Form2() );
+            Application.Run( new Form1() );
+            Application.EnableVisualStyles();
         }
     }
 }
