@@ -39,6 +39,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel = new System.Windows.Forms.Panel();
+            this.отчётToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             this.абитуриентыToolStripMenuItem,
             this.специальностиToolStripMenuItem,
             this.экзаменыToolStripMenuItem,
+            this.отчётToolStripMenuItem,
             this.toolStripSeparator1,
             this.выходToolStripMenuItem});
             this.менюToolStripMenuItem.Name = "менюToolStripMenuItem";
@@ -76,7 +78,7 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.создатьToolStripMenuItem.Text = "Создать";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
@@ -106,7 +108,7 @@
             // создатьToolStripMenuItem2
             // 
             this.создатьToolStripMenuItem2.Name = "создатьToolStripMenuItem2";
-            this.создатьToolStripMenuItem2.Size = new System.Drawing.Size(216, 26);
+            this.создатьToolStripMenuItem2.Size = new System.Drawing.Size(139, 26);
             this.создатьToolStripMenuItem2.Text = "Создать";
             this.создатьToolStripMenuItem2.Click += new System.EventHandler(this.создатьToolStripMenuItem2_Click);
             // 
@@ -128,6 +130,12 @@
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(396, 307);
             this.panel.TabIndex = 3;
+            // 
+            // отчётToolStripMenuItem
+            // 
+            this.отчётToolStripMenuItem.Name = "отчётToolStripMenuItem";
+            this.отчётToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.отчётToolStripMenuItem.Text = "Отчёт";
             // 
             // Form2
             // 
@@ -160,5 +168,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
         private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.ToolStripMenuItem отчётToolStripMenuItem;
     }
 }

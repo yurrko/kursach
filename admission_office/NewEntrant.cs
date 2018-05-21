@@ -31,6 +31,7 @@ namespace admission_office
             ucExam1.Dock = DockStyle.Fill;
             ucExam2.Dock = DockStyle.Fill;
             ucExam3.Dock = DockStyle.Fill;
+            FillComboBoxSpec();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -63,7 +64,7 @@ namespace admission_office
                     new Exam(ucExam2.CbExam.SelectedIndex + 1, int.Parse(ucExam2.TbExamRes.Text)),
                     new Exam(ucExam3.CbExam.SelectedIndex + 1, int.Parse(ucExam3.TbExamRes.Text))
                 };
-                if (AOffice.Instance.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list)) Clear();
+                if (AOffice.Instance.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list, cbSpec.SelectedIndex+1)) Clear();
                 }
             }
         }
@@ -77,6 +78,34 @@ namespace admission_office
             ucExam1.Clear();
             ucExam2.Clear();
             ucExam3.Clear();
+        }
+
+        private void FillComboBoxSpec()
+        {
+            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = @"SELECT CONCAT(speciality,' (',education_form,')') as Edu FROM admission_office.education e 
+                INNER JOIN admission_office.speciality s ON e.id_speciality = s.id
+                INNER JOIN admission_office.education_form ef ON e.id_education_form = ef.id
+                ORDER BY e.id";
+                cmd.ExecuteNonQuery();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+                DataTable dt = new DataTable();
+                dataAdapter.Fill( dt );
+                DataRow[] myData = dt.Select();
+                foreach (var t in myData)
+                {
+                    foreach (var val in t.ItemArray)
+                    {
+                        cbSpec.Items.Add( val );
+                    }
+                }
+                connection.Close();
+            }
         }
     }
 }

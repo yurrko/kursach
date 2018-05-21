@@ -19,7 +19,7 @@ namespace admission_office
             }
         }
 
-        public bool Create_entrant( string firstName, string lastName, string middleName, string birthDate, List<Exam> list )
+        public bool Create_entrant( string firstName, string lastName, string middleName, string birthDate, List<Exam> list, int education )
         {
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
             {
@@ -43,6 +43,13 @@ namespace admission_office
                     cmd.Parameters.AddWithValue( "@result", l.Result );
                     cmd.ExecuteNonQuery();
                 }
+                cmd.CommandText = "INSERT INTO `admission_office`.`entrance` (`id_entrant`, `id_education`, `date`) VALUES (@id_entrant, @id_education, @date)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue( "@id_entrant", lastId );
+                cmd.Parameters.AddWithValue( "@id_education", education );
+                var dt = DateTime.Now;
+                cmd.Parameters.AddWithValue( "@date", dt);
+                cmd.ExecuteNonQuery();
                 connection.Close();
                 return true;
             }
