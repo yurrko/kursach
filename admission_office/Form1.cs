@@ -33,8 +33,14 @@ namespace admission_office
         {
             if (Check())
             {
-                MessageBox.Show( _logAuto.Register( tbLogin.Text, tbPass.Text ), "Сообщение" );
+               if( _logAuto.Register( tbLogin.Text, tbPass.Text )) Clear();
             }
+        }
+
+        private void Clear()
+        {
+            tbLogin.Text = "";
+            tbPass.Text = "";
         }
 
         private bool Check()

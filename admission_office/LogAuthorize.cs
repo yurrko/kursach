@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace admission_office
 {
@@ -28,12 +29,11 @@ namespace admission_office
                 result = cmd.ExecuteScalar().ToString();
                 connection.Close();
             }
-            return (int.Parse(result) == 1) ? true : false;
+            return (int.Parse(result) == 1);
         }
 
-        public string Register( string login, string password )
+        public bool Register( string login, string password )
         {
-            int result;
             _md5Hash = MD5.Create();
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection))
             {
@@ -44,10 +44,20 @@ namespace admission_office
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue( "@Login", login );
                 cmd.Parameters.AddWithValue( "@Password", Encrypt( _md5Hash, password ) );
-                result = cmd.ExecuteNonQuery();
+                var result = 0;
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
                 connection.Close();
+                if (result == 1) MessageBox.Show("Пользователь зарегистрирован", "Сообщение");
             }
-            return result == 1 ? "Пользователь зарегистрирован" : "Произошла ошибка";
+            return true;
         }
 
         private string Encrypt( MD5 md5Hash, string input )
