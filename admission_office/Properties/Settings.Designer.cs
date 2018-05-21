@@ -22,16 +22,5 @@ namespace admission_office.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=127.0.0.1;user id=root;password=30Ebashy04;persistsecurityinfo=True;databa" +
-            "se=admission_office")]
-        public string admission_officeConnectionString {
-            get {
-                return ((string)(this["admission_officeConnectionString"]));
-            }
-        }
     }
 }
