@@ -43,21 +43,21 @@
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(179, 125);
+            this.panel3.Location = new System.Drawing.Point(179, 116);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 45);
             this.panel3.TabIndex = 42;
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(179, 70);
+            this.panel2.Location = new System.Drawing.Point(179, 61);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 45);
             this.panel2.TabIndex = 41;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(179, 14);
+            this.panel1.Location = new System.Drawing.Point(179, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 45);
             this.panel1.TabIndex = 40;

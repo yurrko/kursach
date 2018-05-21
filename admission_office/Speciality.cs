@@ -29,18 +29,24 @@ namespace admission_office
         public Speciality()
         {
             InitializeComponent();
+            panel1.Controls.Add( ucExam1 );
+            panel2.Controls.Add( ucExam2 );
+            panel3.Controls.Add( ucExam3 );
+            ucExam1.Dock = DockStyle.Fill;
+            ucExam2.Dock = DockStyle.Fill;
+            ucExam3.Dock = DockStyle.Fill;
         }
 
         private void btnSave_Click( object sender, EventArgs e )
         {
-            if(tbSpec.Text.Length != 0 
-               && mtbFree.Text.Length != 0 
-               && ucExam1.TbExamRes.Text.Length != 0
-               && ucExam2.TbExamRes.Text.Length != 0
-               && ucExam3.TbExamRes.Text.Length != 0
-               && ucExam1.CbExam.SelectedIndex != -1
-               && ucExam2.CbExam.SelectedIndex != -1
-               && ucExam3.CbExam.SelectedIndex != -1
+            if(tbSpec.Text.Length == 0 
+               && mtbFree.Text.Length == 0 
+               && ucExam1.TbExamRes.Text.Length == 0
+               && ucExam2.TbExamRes.Text.Length == 0
+               && ucExam3.TbExamRes.Text.Length == 0
+               && ucExam1.CbExam.SelectedIndex == -1
+               && ucExam2.CbExam.SelectedIndex == -1
+               && ucExam3.CbExam.SelectedIndex == -1
                )
             {
                 MessageBox.Show( "Заполните все обязательные поля", "Ошибка" );
