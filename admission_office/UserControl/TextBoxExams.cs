@@ -41,6 +41,11 @@ namespace admission_office
             }
         }
 
+        public bool CheckFill()
+        {
+            return (cbExam.SelectedIndex == -1 || tbExamRes.Text.Length == 0);
+        }
+
         public void Clear()
         {
             cbExam.SelectedIndex = -1;

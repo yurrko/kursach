@@ -39,12 +39,11 @@ namespace admission_office
         {
             if (tbFirstName.Text.Length == 0
                 || tbLastname.Text.Length == 0
-                || ucExam1.CbExam.SelectedIndex == -1
-                || ucExam2.CbExam.SelectedIndex == -1
-                || ucExam3.CbExam.SelectedIndex == -1
-                || ucExam1.TbExamRes.Text.Length == 0
-                || ucExam2.TbExamRes.Text.Length == 0
-                || ucExam3.TbExamRes.Text.Length == 0
+                || ucExam1.CheckFill()
+                || ucExam2.CheckFill()
+                || ucExam3.CheckFill()
+                || cbEduType.SelectedIndex == -1
+                || cbSpec.SelectedIndex == -1
             )
             {
                 MessageBox.Show("Заполните все обязательные поля", "Ошибка");
@@ -80,6 +79,7 @@ namespace admission_office
             ucExam2.Clear();
             ucExam3.Clear();
             cbSpec.Text="";
+            cbEduType.SelectedIndex = -1;
         }
     }
 }
