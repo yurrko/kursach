@@ -31,7 +31,8 @@ namespace admission_office
             ucExam1.Dock = DockStyle.Fill;
             ucExam2.Dock = DockStyle.Fill;
             ucExam3.Dock = DockStyle.Fill;
-            FillComboBoxSpec();
+            cbSpec.Items.AddRange(FillCB( SqlQuery.SqlQueries[(int)SqlQueryNum.EduSpec] ) );
+            cbEduType.Items.AddRange(FillCB(SqlQuery.SqlQueries[(int) SqlQueryNum.EduType]));
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -81,8 +82,7 @@ namespace admission_office
             cbSpec.Text="";
         }
 
-        //Переписать через ComboBoxItems
-        private void FillComboBoxSpec()
+        private ComboBoxItem[] FillCB(string sql)
         {
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
             {
@@ -90,10 +90,7 @@ namespace admission_office
                 connection.Open();
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.CommandText = @"SELECT e.id, CONCAT(speciality,' (',education_form,')') as Edu FROM admission_office.education e 
-                INNER JOIN admission_office.speciality s ON e.id_speciality = s.id
-                INNER JOIN admission_office.education_form ef ON e.id_education_form = ef.id
-                ORDER BY e.id";
+                cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
                 DataTable dt = new DataTable();
@@ -102,11 +99,62 @@ namespace admission_office
                 var dataToCombo = new ComboBoxItem[myData.Length];
                 for (int i = 0; i < myData.Length; i++)
                 {
-                    dataToCombo[i] = new ComboBoxItem(Convert.ToInt32(myData[i].ItemArray[0]), myData[i].ItemArray[1].ToString());
+                    dataToCombo[i] = new ComboBoxItem( Convert.ToInt32( myData[i].ItemArray[0] ), myData[i].ItemArray[1].ToString() );
                 }
-                cbSpec.Items.AddRange(dataToCombo);
                 connection.Close();
+                return dataToCombo;
             }
         }
+
+        //private void FillComboBoxSpec()
+        //{
+        //    using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
+        //    {
+        //        MySqlCommand cmd = new MySqlCommand();
+        //        connection.Open();
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.Connection = connection;
+        //        cmd.CommandText = @"SELECT e.id, CONCAT(speciality,' (',education_form,')') as Edu FROM admission_office.education e 
+        //        INNER JOIN admission_office.speciality s ON e.id_speciality = s.id
+        //        INNER JOIN admission_office.education_form ef ON e.id_education_form = ef.id
+        //        ORDER BY e.id";
+        //        cmd.ExecuteNonQuery();
+        //        MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+        //        DataTable dt = new DataTable();
+        //        dataAdapter.Fill( dt );
+        //        DataRow[] myData = dt.Select();
+        //        var dataToCombo = new ComboBoxItem[myData.Length];
+        //        for (int i = 0; i < myData.Length; i++)
+        //        {
+        //            dataToCombo[i] = new ComboBoxItem(Convert.ToInt32(myData[i].ItemArray[0]), myData[i].ItemArray[1].ToString());
+        //        }
+        //        cbSpec.Items.AddRange(dataToCombo);
+        //        connection.Close();
+        //    }
+        //}
+
+        //private void FillComboBoxEduType()
+        //{
+        //    using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
+        //    {
+        //        MySqlCommand cmd = new MySqlCommand();
+        //        connection.Open();
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.Connection = connection;
+        //        cmd.CommandText = @"SELECT `edu_type`.`id`, `edu_type`.`edu_type` FROM `admission_office`.`edu_type`;";
+        //        cmd.ExecuteNonQuery();
+        //        MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+        //        DataTable dt = new DataTable();
+        //        dataAdapter.Fill( dt );
+        //        DataRow[] myData = dt.Select();
+        //        var dataToCombo = new ComboBoxItem[myData.Length];
+        //        for (int i = 0; i < myData.Length; i++)
+        //        {
+        //            dataToCombo[i] = new ComboBoxItem( Convert.ToInt32( myData[i].ItemArray[0] ), myData[i].ItemArray[1].ToString() );
+        //        }
+        //        cbEduType.Items.AddRange( dataToCombo );
+        //        connection.Close();
+        //    }
+        //}
     }
 }
