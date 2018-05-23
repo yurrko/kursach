@@ -122,5 +122,29 @@ namespace admission_office
                 excel.SaveAs( new FileInfo( "test.xlsx" ) );
             }
         }
+
+        public static ComboBoxItem[] FillCB( string sql )
+        {
+            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+                DataTable dt = new DataTable();
+                dataAdapter.Fill( dt );
+                DataRow[] myData = dt.Select();
+                var dataToCombo = new ComboBoxItem[myData.Length];
+                for (int i = 0; i < myData.Length; i++)
+                {
+                    dataToCombo[i] = new ComboBoxItem( Convert.ToInt32( myData[i].ItemArray[0] ), myData[i].ItemArray[1].ToString() );
+                }
+                connection.Close();
+                return dataToCombo;
+            }
+        }
     }
 }
