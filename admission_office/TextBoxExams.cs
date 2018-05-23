@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
@@ -32,20 +26,19 @@ namespace admission_office
                 connection.Open();
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.CommandText = "SELECT subject FROM admission_office.subject ORDER BY id";
+                cmd.CommandText = "SELECT id, subject FROM admission_office.subject ORDER BY id";
                 cmd.ExecuteNonQuery();
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
                 DataTable dt = new DataTable();
                 dataAdapter.Fill( dt );
-
                 DataRow[] myData = dt.Select();
-                foreach (var t in myData)
+                var dataToCombo = new ComboBoxItem[myData.Length];
+                for (int i = 0; i < myData.Length; i++)
                 {
-                    foreach (var val in t.ItemArray)
-                    {
-                        cbExam.Items.Add( val );
-                    }
+                    dataToCombo[i] = new ComboBoxItem(Convert.ToInt32(myData[i].ItemArray[0]),
+                        myData[i].ItemArray[1].ToString());
                 }
+                cbExam.Items.AddRange(dataToCombo);
                 connection.Close();
             }
         }

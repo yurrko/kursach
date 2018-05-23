@@ -48,5 +48,10 @@ namespace admission_office
         {
             Application.Exit();
         }
+
+        private void отчётToolStripMenuItem_Click( object sender, System.EventArgs e )
+        {
+            AOffice.Instance.Create_report();
+        }
     }
 }

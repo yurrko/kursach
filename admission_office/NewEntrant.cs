@@ -60,11 +60,11 @@ namespace admission_office
                 {
                     List<Exam> list = new List<Exam>()
                 {
-                    new Exam(ucExam1.CbExam.SelectedIndex + 1, int.Parse(ucExam1.TbExamRes.Text)),
-                    new Exam(ucExam2.CbExam.SelectedIndex + 1, int.Parse(ucExam2.TbExamRes.Text)),
-                    new Exam(ucExam3.CbExam.SelectedIndex + 1, int.Parse(ucExam3.TbExamRes.Text))
+                    new Exam((ucExam1.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam1.TbExamRes.Text)),
+                    new Exam((ucExam2.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam2.TbExamRes.Text)),
+                    new Exam((ucExam3.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam3.TbExamRes.Text))
                 };
-                if (AOffice.Instance.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list, cbSpec.SelectedIndex+1)) Clear();
+                if (AOffice.Instance.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list, (cbSpec.SelectedItem as ComboBoxItem).Value)) Clear();
                 }
             }
         }
@@ -78,8 +78,10 @@ namespace admission_office
             ucExam1.Clear();
             ucExam2.Clear();
             ucExam3.Clear();
+            cbSpec.Text="";
         }
 
+        //Переписать через ComboBoxItems
         private void FillComboBoxSpec()
         {
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
@@ -88,7 +90,7 @@ namespace admission_office
                 connection.Open();
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.CommandText = @"SELECT CONCAT(speciality,' (',education_form,')') as Edu FROM admission_office.education e 
+                cmd.CommandText = @"SELECT e.id, CONCAT(speciality,' (',education_form,')') as Edu FROM admission_office.education e 
                 INNER JOIN admission_office.speciality s ON e.id_speciality = s.id
                 INNER JOIN admission_office.education_form ef ON e.id_education_form = ef.id
                 ORDER BY e.id";
@@ -97,13 +99,12 @@ namespace admission_office
                 DataTable dt = new DataTable();
                 dataAdapter.Fill( dt );
                 DataRow[] myData = dt.Select();
-                foreach (var t in myData)
+                var dataToCombo = new ComboBoxItem[myData.Length];
+                for (int i = 0; i < myData.Length; i++)
                 {
-                    foreach (var val in t.ItemArray)
-                    {
-                        cbSpec.Items.Add( val );
-                    }
+                    dataToCombo[i] = new ComboBoxItem(Convert.ToInt32(myData[i].ItemArray[0]), myData[i].ItemArray[1].ToString());
                 }
+                cbSpec.Items.AddRange(dataToCombo);
                 connection.Close();
             }
         }

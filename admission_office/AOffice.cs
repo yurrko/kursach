@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using OfficeOpenXml;
 
 
 namespace admission_office
@@ -106,6 +108,18 @@ namespace admission_office
                 cmd.ExecuteNonQuery();
                 connection.Close();
                 return true;
+            }
+        }
+
+        public void Create_report()
+        {
+            using (var excel = new ExcelPackage())
+            {
+                var ws = excel.Workbook.Worksheets.Add( "MyWorksheet" );
+
+                ws.Cells["A1"].Value = 100;
+                ws.Cells["A2"].Formula = "A1*2";
+                excel.SaveAs( new FileInfo( "test.xlsx" ) );
             }
         }
     }
