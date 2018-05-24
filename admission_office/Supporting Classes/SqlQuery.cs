@@ -8,12 +8,14 @@
                 INNER JOIN admission_office.speciality s ON e.id_speciality = s.id
                 INNER JOIN admission_office.education_form ef ON e.id_education_form = ef.id
                 ORDER BY e.id",
-            "SELECT id, subject FROM admission_office.subject ORDER BY id"
+            "SELECT id, subject FROM admission_office.subject ORDER BY id",
+            "SELECT id FROM admission_office.speciality WHERE speciality = @speciality"
     };
     }
     enum SqlQueryNum
     {
         EduSpec,
-        Subject
+        Subject,
+        SpecID
     }
 }
