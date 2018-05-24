@@ -42,8 +42,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblSpec = new System.Windows.Forms.Label();
             this.cbSpec = new System.Windows.Forms.ComboBox();
-            this.cbEduType = new System.Windows.Forms.ComboBox();
-            this.lblEduType = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // dtpBirthdate
@@ -161,30 +159,10 @@
             this.cbSpec.Size = new System.Drawing.Size(200, 24);
             this.cbSpec.TabIndex = 41;
             // 
-            // cbEduType
-            // 
-            this.cbEduType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEduType.FormattingEnabled = true;
-            this.cbEduType.Location = new System.Drawing.Point(169, 262);
-            this.cbEduType.Name = "cbEduType";
-            this.cbEduType.Size = new System.Drawing.Size(200, 24);
-            this.cbEduType.TabIndex = 43;
-            // 
-            // lblEduType
-            // 
-            this.lblEduType.AutoSize = true;
-            this.lblEduType.Location = new System.Drawing.Point(169, 238);
-            this.lblEduType.Name = "lblEduType";
-            this.lblEduType.Size = new System.Drawing.Size(118, 17);
-            this.lblEduType.TabIndex = 42;
-            this.lblEduType.Text = "Бюджет/Договор";
-            // 
             // NewEntrant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.cbEduType);
-            this.Controls.Add(this.lblEduType);
             this.Controls.Add(this.cbSpec);
             this.Controls.Add(this.lblSpec);
             this.Controls.Add(this.panel3);
@@ -221,7 +199,5 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblSpec;
         private System.Windows.Forms.ComboBox cbSpec;
-        private System.Windows.Forms.ComboBox cbEduType;
-        private System.Windows.Forms.Label lblEduType;
     }
 }

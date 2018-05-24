@@ -32,7 +32,6 @@ namespace admission_office
             ucExam2.Dock = DockStyle.Fill;
             ucExam3.Dock = DockStyle.Fill;
             cbSpec.Items.AddRange(AOffice.FillCB( SqlQuery.SqlQueries[(int)SqlQueryNum.EduSpec] ) );
-            cbEduType.Items.AddRange(AOffice.FillCB(SqlQuery.SqlQueries[(int) SqlQueryNum.EduType]));
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -42,7 +41,6 @@ namespace admission_office
                 || ucExam1.CheckFill()
                 || ucExam2.CheckFill()
                 || ucExam3.CheckFill()
-                || cbEduType.SelectedIndex == -1
                 || cbSpec.SelectedIndex == -1
             )
             {
@@ -69,8 +67,7 @@ namespace admission_office
                                                         tbMiddleName.Text, 
                                                         dtpBirthdate.Text, 
                                                         listOfExam, 
-                                                        (cbSpec.SelectedItem as ComboBoxItem).Value, 
-                                                        (cbEduType.SelectedItem as ComboBoxItem ).Value))
+                                                        (cbSpec.SelectedItem as ComboBoxItem).Value))
                         Clear();
                 }
             }
@@ -86,7 +83,6 @@ namespace admission_office
             ucExam2.Clear();
             ucExam3.Clear();
             cbSpec.Text="";
-            cbEduType.SelectedIndex = -1;
         }
     }
 }
