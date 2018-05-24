@@ -7,6 +7,7 @@ namespace admission_office
     {
         Form2 program = new Form2();
         private LogAuthorize _logAuto = new LogAuthorize();
+        public int Role { get; set; }
         private readonly string[] _connStr = { "server=localhost;user=root;database=admission_office;password=12345687", "server=localhost;user=root;database=admission_office_archive;password=12345687" };
         public Form1()
         {
@@ -17,19 +18,26 @@ namespace admission_office
             btnRegister.Hide();
             program.Owner = this;
         }
-
+        
         private void btnAuthorize_Click( object sender, EventArgs e )
         {
-            //if (Check())
-            //{
-            //    if (log_auto.Authorize( tbLogin.Text, tbPass.Text))
-            //    {
+            if (Check())
+            {
+                var temp = _logAuto.Authorize( tbLogin.Text, tbPass.Text );
+                if (temp != -1)
+                {
                     Hide();
+                    Role = temp;
+                    program.setAccess();
                     program.ShowDialog();
                     Register_mode();
-            //    }
-            //}
-           
+                }
+                else
+                {
+                    MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
+                }
+            }
+
         }
 
         private void btnRegister_Click( object sender, EventArgs e )

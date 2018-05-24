@@ -10,23 +10,30 @@ namespace admission_office
     class LogAuthorize
     {
         MD5 _md5Hash;
-        public bool Authorize( string login, string password)
+        public int Authorize( string login, string password)
         {
             _md5Hash = MD5.Create();
-            string result;
+            int result;
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.CommandText = "SELECT COUNT(*) FROM authorize WHERE Login = '@Login' AND password = '@Password'";
+                cmd.CommandText = "SELECT role FROM authorize WHERE Login = @Login AND password = @Password";
                 cmd.Parameters.AddWithValue( "@Login", login );
                 cmd.Parameters.AddWithValue( "@Password", Encrypt( _md5Hash, password ) );
-                result = cmd.ExecuteScalar().ToString();
+                try {
+                    result = Convert.ToInt32( cmd.ExecuteScalar() );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show( ex.Message );
+                    return -1;
+                }
                 connection.Close();
             }
-            return (int.Parse(result) == 1);
+            return result;
         }
 
         public bool Register( string login, string password, int role )
