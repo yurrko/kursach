@@ -13,7 +13,7 @@ namespace admission_office
         public int Authorize( string login, string password)
         {
             _md5Hash = MD5.Create();
-            int result;
+            string result;
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
             {
                 MySqlCommand cmd = new MySqlCommand();
@@ -24,16 +24,35 @@ namespace admission_office
                 cmd.Parameters.AddWithValue( "@Login", login );
                 cmd.Parameters.AddWithValue( "@Password", Encrypt( _md5Hash, password ) );
                 try {
-                    result = Convert.ToInt32( cmd.ExecuteScalar() );
+                    result = cmd.ExecuteScalar().ToString();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show( ex.Message );
+                    Log( login, false );
                     return -1;
                 }
                 connection.Close();
             }
-            return result;
+            Log( login, true );
+            return int.Parse(result);
+        }
+
+        private void Log( string login, bool result)
+        {
+            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = "INSERT INTO `admission_office`.`log` (`timestamp`, `user`, `success`) VALUES (@timeStamp, @user, @success)";
+                var dt = DateTime.Now;
+                cmd.Parameters.AddWithValue( "@timeStamp", dt );
+                cmd.Parameters.AddWithValue( "@user", login );
+                cmd.Parameters.AddWithValue( "@success", result);
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
         }
 
         public bool Register( string login, string password, int role )
