@@ -78,11 +78,10 @@ namespace admission_office
             tbFirstName.Text = "";
             tbMiddleName.Text = "";
             tbLastname.Text = "";
-            dtpBirthdate.Text = "";
             ucExam1.Clear();
             ucExam2.Clear();
             ucExam3.Clear();
-            cbSpec.Text="";
+            cbSpec.SelectedIndex=-1;
         }
     }
 }
