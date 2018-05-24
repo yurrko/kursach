@@ -53,5 +53,11 @@ namespace admission_office
         {
             AOffice.Instance.Create_report();
         }
+
+        private void добавитьToolStripMenuItem_Click( object sender, System.EventArgs e )
+        {
+            Owner.Visible = true;
+            Visible = false;
+        }
     }
 }

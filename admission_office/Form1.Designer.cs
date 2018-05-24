@@ -35,7 +35,7 @@
             this.lblPass = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
             this.cbSelectDB = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblSelectDB = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbLogin
@@ -54,7 +54,7 @@
             // 
             // btnAuthorize
             // 
-            this.btnAuthorize.Location = new System.Drawing.Point(35, 150);
+            this.btnAuthorize.Location = new System.Drawing.Point(35, 139);
             this.btnAuthorize.Name = "btnAuthorize";
             this.btnAuthorize.Size = new System.Drawing.Size(75, 23);
             this.btnAuthorize.TabIndex = 2;
@@ -82,9 +82,9 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(167, 150);
+            this.btnRegister.Location = new System.Drawing.Point(35, 160);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(75, 23);
+            this.btnRegister.Size = new System.Drawing.Size(116, 31);
             this.btnRegister.TabIndex = 5;
             this.btnRegister.Text = "Регистрация";
             this.btnRegister.UseVisualStyleBackColor = true;
@@ -102,21 +102,21 @@
             this.cbSelectDB.TabIndex = 0;
             this.cbSelectDB.SelectedIndexChanged += new System.EventHandler(this.cbSelectDB_SelectedIndexChanged);
             // 
-            // label1
+            // lblSelectDB
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 209);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 17);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Выбор БД для подключения";
+            this.lblSelectDB.AutoSize = true;
+            this.lblSelectDB.Location = new System.Drawing.Point(36, 209);
+            this.lblSelectDB.Name = "lblSelectDB";
+            this.lblSelectDB.Size = new System.Drawing.Size(196, 17);
+            this.lblSelectDB.TabIndex = 6;
+            this.lblSelectDB.Text = "Выбор БД для подключения";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(278, 278);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblSelectDB);
             this.Controls.Add(this.cbSelectDB);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.lblPass);
@@ -142,7 +142,7 @@
         private System.Windows.Forms.Label lblPass;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.ComboBox cbSelectDB;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSelectDB;
     }
 }
 

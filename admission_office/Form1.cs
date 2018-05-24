@@ -5,6 +5,7 @@ namespace admission_office
 {
     public partial class Form1 : Form
     {
+        Form2 program = new Form2();
         private LogAuthorize _logAuto = new LogAuthorize();
         private readonly string[] _connStr = { "server=localhost;user=root;database=admission_office;password=12345687", "server=localhost;user=root;database=admission_office_archive;password=12345687" };
         public Form1()
@@ -13,6 +14,8 @@ namespace admission_office
             Text = "Авторизация";
             ConnectionString.Connection = _connStr[0];
             cbSelectDB.SelectedIndex = 0;
+            btnRegister.Hide();
+            program.Owner = this;
         }
 
         private void btnAuthorize_Click( object sender, EventArgs e )
@@ -22,8 +25,8 @@ namespace admission_office
             //    if (log_auto.Authorize( tbLogin.Text, tbPass.Text))
             //    {
                     Hide();
-                    var program = new Form2();
                     program.ShowDialog();
+                    Register_mode();
             //    }
             //}
            
@@ -33,7 +36,11 @@ namespace admission_office
         {
             if (Check())
             {
-               if( _logAuto.Register( tbLogin.Text, tbPass.Text )) Clear();
+               if( _logAuto.Register( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex )) { 
+                    Clear();
+                    Visible = false;
+                    program.Visible = true;
+                }
             }
         }
 
@@ -61,6 +68,17 @@ namespace admission_office
         private void Form1_Load( object sender, EventArgs e )
         {
             tbLogin.Select();
+        }
+
+        private void Register_mode()
+        {
+            Text = "Регистрация";
+            btnAuthorize.Hide();
+            btnRegister.Show();
+            cbSelectDB.Items.Clear();
+            cbSelectDB.SelectedIndexChanged -= new EventHandler( cbSelectDB_SelectedIndexChanged );
+            cbSelectDB.Items.AddRange( new string[] { "Админ", "Член комиссии", "Секретарь" } );
+            lblSelectDB.Text = "Роль";
         }
     }
 }

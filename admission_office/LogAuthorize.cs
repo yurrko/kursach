@@ -29,7 +29,7 @@ namespace admission_office
             return (int.Parse(result) == 1);
         }
 
-        public bool Register( string login, string password )
+        public bool Register( string login, string password, int role )
         {
             _md5Hash = MD5.Create();
             using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection))
@@ -37,10 +37,11 @@ namespace admission_office
                 connection.Open();
                 MySqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "INSERT INTO authorize (login, password) VALUES (@Login, @Password)";
+                cmd.CommandText = "INSERT INTO authorize (login, password, role) VALUES (@Login, @Password, @Role)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue( "@Login", login );
                 cmd.Parameters.AddWithValue( "@Password", Encrypt( _md5Hash, password ) );
+                cmd.Parameters.AddWithValue( "@Role", role );
                 var result = 0;
                 try
                 {
