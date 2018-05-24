@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using OfficeOpenXml;
-using Microsoft.Office.Interop.Excel;
 using System.Drawing;
 using System.Windows.Forms;
-using Application = Microsoft.Office.Interop.Excel.Application;
+//using Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace admission_office
 {
@@ -77,7 +77,7 @@ namespace admission_office
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 //Получаем id записи в таблицы speciality у которой название совпадает с введенным
-                cmd.CommandText = SqlQuery.SqlQueries[(int)SqlQueryNum.SpecID];
+                cmd.CommandText = SqlQuery.SqlQueries[(int)SqlQueryNum.SpecId];
                 cmd.Parameters.AddWithValue( "@speciality", specName );
                 int specId;
                 try
@@ -176,7 +176,7 @@ namespace admission_office
         public void Create_report()
         {
             //Объявляем приложение
-            Application ex = new Application();
+            Excel.Application ex = new Microsoft.Office.Interop.Excel.Application();
 
             //Отобразить Excel
             ex.Visible = true;
@@ -185,28 +185,60 @@ namespace admission_office
             ex.SheetsInNewWorkbook = 1;
 
             //Добавить рабочую книгу
-            Workbook workBook = ex.Workbooks.Add( Type.Missing );
+            Excel.Workbook workBook = ex.Workbooks.Add( Type.Missing );
 
             //Отключить отображение окон с сообщениями
             ex.DisplayAlerts = false;
 
             //Получаем первый лист документа (счет начинается с 1)
-            Worksheet sheet = (Worksheet)ex.Worksheets.get_Item( 1 );
+            Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item( 1 );
 
             //Название листа (вкладки снизу)
-            var dt = DateTime.Today;
-            sheet.Name = "Отчет от " + dt.Date.ToShortDateString();
+            var dateTime = DateTime.Today;
+            sheet.Name = "Отчет от " + dateTime.Date.ToShortDateString();
 
             //Пример заполнения ячеек
-            for (int i = 1; i <= 9; i++)
+
+            //Данные для Excel
+            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
             {
-                for (int j = 1; j < 9; j++)
-                    sheet.Cells[i, j] = String.Format( "Boom {0} {1}", i, j );
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = SqlQuery.SqlQueries[(int) SqlQueryNum.Report];
+                cmd.ExecuteNonQuery();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+                System.Data.DataTable dt = new System.Data.DataTable();
+                dataAdapter.Fill( dt );
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    sheet.Cells[1, i + 1] = String.Format("{0}", dt.Columns[i]);
+                }
+                
+                //dt.Columns[]
+
+                DataRow[] myDataRows = dt.Select();
+                var dataToCombo = new ComboBoxItem[myDataRows.Length];
+                for (int i = 0; i < myDataRows.Length; i++)
+                {
+                    for (int j = 0; j < myDataRows[i].ItemArray.Length; j++)
+                        sheet.Cells[i+2, j+1] = String.Format( "{0}", myDataRows[i].ItemArray[j] );
+                }
+                connection.Close();
             }
+            //Данные
+
+            //for (int i = 1; i <= 9; i++)
+            //{
+            //    for (int j = 1; j < 9; j++)
+            //        sheet.Cells[i, j] = String.Format( "Boom {0} {1}", i, j );
+            //}
 
             //Захватываем диапазон ячеек
 
-            Range range1 = sheet.get_Range( sheet.Cells[1, 1], sheet.Cells[9, 9] );
+            Excel.Range range1 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 9]];
+            //Excel.Range(sheet.Cells[1, 1], sheet.Cells[9, 9]);
 
 
             //Шрифт для диапазона
@@ -215,7 +247,7 @@ namespace admission_office
             range1.Cells.Font.Size = 10;
 
             //Захватываем другой диапазон ячеек
-            Range range2 = sheet.get_Range( sheet.Cells[1, 1], sheet.Cells[9, 2] );
+            Excel.Range range2 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 2]];
             range2.Cells.Font.Name = "Times New Roman";
 
             //Задаем цвет этого диапазона. Необходимо подключить System.Drawing

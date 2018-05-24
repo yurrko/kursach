@@ -21,22 +21,22 @@ namespace admission_office
         
         private void btnAuthorize_Click( object sender, EventArgs e )
         {
-            if (Check())
-            {
-                var temp = _logAuto.Authorize( tbLogin.Text, tbPass.Text );
-                if (temp != -1)
-                {
+            //if (Check())
+            //{
+            //    var temp = _logAuto.Authorize( tbLogin.Text, tbPass.Text );
+            //    if (temp != -1)
+            //    {
                     Hide();
-                    Role = temp;
+                    //Role = temp;
                     program.setAccess();
                     program.ShowDialog();
                     Register_mode();
-                }
-                else
-                {
-                    MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
-                }
-            }
+                //}
+                //else
+                //{
+                //    MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
+                //}
+            //}
 
         }
 
