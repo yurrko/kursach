@@ -51,6 +51,7 @@
             this.tbPass.Name = "tbPass";
             this.tbPass.Size = new System.Drawing.Size(100, 22);
             this.tbPass.TabIndex = 1;
+            this.tbPass.UseSystemPasswordChar = true;
             // 
             // btnAuthorize
             // 
