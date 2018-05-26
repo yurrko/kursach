@@ -39,7 +39,7 @@ namespace admission_office
         public bool Create_speciality(string specName, int eduForm, int numOfFree,  int numOfPaid, List<Exam> list )
         {
             using (MySqlConnection connection = new MySqlConnection(ConnectionString.Connection))
-            {
+            {//
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
                 cmd.CommandType = CommandType.Text;
