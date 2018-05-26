@@ -85,13 +85,6 @@ namespace admission_office
                 return false;
             }
             return true;
-        }
-
-        private void Form1_Load( object sender, EventArgs e )
-        {
-            tbLogin.Select();
-        }
-
-        
+        }        
     }
 }
