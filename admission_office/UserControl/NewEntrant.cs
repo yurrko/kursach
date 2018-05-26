@@ -31,7 +31,7 @@ namespace admission_office
             ucExam1.Dock = DockStyle.Fill;
             ucExam2.Dock = DockStyle.Fill;
             ucExam3.Dock = DockStyle.Fill;
-            cbSpec.Items.AddRange(AOffice.FillCB( SqlQuery.SqlQueries[(int)SqlQueryNum.EduSpec] ) );
+            cbSpec.Items.AddRange(AOffice.FillCB( SqlQueryList.Queries[(int)SqlQueryNum.EduSpec] ) );
         }
 
         private void btnSave_Click(object sender, EventArgs e)
