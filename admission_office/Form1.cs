@@ -65,16 +65,10 @@ namespace admission_office
             btnAuthorize.Text = "Регистрация";
             cbSelectDB.Items.Clear();
             cbSelectDB.Items.AddRange( new string[] { "Админ", "Член комиссии", "Секретарь" } );
+            cbSelectDB.SelectedIndex = 2;
             lblSelectDB.Text = "Роль";
             cd = null;
             cd += Register;
-        }
-
-
-        private void Clear()
-        {
-            tbLogin.Text = "";
-            tbPass.Text = "";
         }
 
         private bool Check()
@@ -85,6 +79,12 @@ namespace admission_office
                 return false;
             }
             return true;
-        }        
+        }
+
+        private void Clear()
+        {
+            tbLogin.Text = "";
+            tbPass.Text = "";
+        }
     }
 }
