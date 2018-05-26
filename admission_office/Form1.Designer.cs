@@ -33,7 +33,6 @@
             this.btnAuthorize = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.lblPass = new System.Windows.Forms.Label();
-            this.btnRegister = new System.Windows.Forms.Button();
             this.cbSelectDB = new System.Windows.Forms.ComboBox();
             this.lblSelectDB = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -81,16 +80,6 @@
             this.lblPass.TabIndex = 4;
             this.lblPass.Text = "Пароль";
             // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(35, 160);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(116, 31);
-            this.btnRegister.TabIndex = 5;
-            this.btnRegister.Text = "Регистрация";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
             // cbSelectDB
             // 
             this.cbSelectDB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -101,7 +90,6 @@
             this.cbSelectDB.Name = "cbSelectDB";
             this.cbSelectDB.Size = new System.Drawing.Size(197, 24);
             this.cbSelectDB.TabIndex = 0;
-            this.cbSelectDB.SelectedIndexChanged += new System.EventHandler(this.cbSelectDB_SelectedIndexChanged);
             // 
             // lblSelectDB
             // 
@@ -119,7 +107,6 @@
             this.ClientSize = new System.Drawing.Size(278, 278);
             this.Controls.Add(this.lblSelectDB);
             this.Controls.Add(this.cbSelectDB);
-            this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.lblPass);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnAuthorize);
@@ -141,7 +128,6 @@
         private System.Windows.Forms.Button btnAuthorize;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblPass;
-        private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.ComboBox cbSelectDB;
         private System.Windows.Forms.Label lblSelectDB;
     }
