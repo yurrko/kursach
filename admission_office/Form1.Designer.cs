@@ -54,13 +54,13 @@
             // 
             // btnAuthorize
             // 
+            this.btnAuthorize.AutoSize = true;
             this.btnAuthorize.Location = new System.Drawing.Point(35, 139);
             this.btnAuthorize.Name = "btnAuthorize";
-            this.btnAuthorize.Size = new System.Drawing.Size(75, 23);
+            this.btnAuthorize.Size = new System.Drawing.Size(75, 27);
             this.btnAuthorize.TabIndex = 2;
             this.btnAuthorize.Text = "Войти";
             this.btnAuthorize.UseVisualStyleBackColor = true;
-            this.btnAuthorize.Click += new System.EventHandler(this.btnAuthorize_Click);
             // 
             // lblName
             // 
