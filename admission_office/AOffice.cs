@@ -25,46 +25,15 @@ namespace admission_office
 
         public bool Create_entrant( string firstName, string lastName, string middleName, string birthDate, List<Exam> list, int education)
         {
-            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                connection.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
-                cmd.CommandText = "INSERT INTO `admission_office`.`entrants` (`first_name`, `middle_name`, `last_name`, `birth_date`) VALUES (@firstName, @middleName, @lastname, @birthDate)";
-                cmd.Parameters.AddWithValue( "@firstName", firstName );
-                cmd.Parameters.AddWithValue( "@lastName", lastName );
-                cmd.Parameters.AddWithValue( "@middleName", middleName );
-                cmd.Parameters.AddWithValue( "@birthDate", birthDate );
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "SELECT @@IDENTITY";
-                int lastId = Convert.ToInt32( cmd.ExecuteScalar() );
-                cmd.CommandText = "INSERT INTO `admission_office`.`ege_result` (`id_entrant`, `id_subject`, `result`) VALUES (@id_entrant, @id_subject, @result)";
-                foreach (var l in list) {
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue( "@id_entrant", lastId );
-                    cmd.Parameters.AddWithValue( "@id_subject", l.Id );
-                    cmd.Parameters.AddWithValue( "@result", l.Result );
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show( ex.Message, "Ошибка" );
-                        return false;
-                    }
-                }
-                cmd.CommandText = "INSERT INTO `admission_office`.`entrance` (`id_entrant`, `id_education`, `date`) VALUES (@id_entrant, @id_education, @date)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue( "@id_entrant", lastId );
-                cmd.Parameters.AddWithValue( "@id_education", education );
-                var dt = DateTime.Now;
-                cmd.Parameters.AddWithValue( "@date", dt);
-                cmd.ExecuteNonQuery();
-                connection.Close();
-                return true;
-            }
+            int insertedID = DBDriver.Instance.InsertValuesAndReceiveIdentity( SqlQueryList.Queries[(int)SqlQueryNum.AddEntrant],
+                                                                new string[] { firstName, lastName, middleName, birthDate } );
+            foreach (var l in list)
+                DBDriver.Instance.InsertValues( SqlQueryList.Queries[(int)SqlQueryNum.AddEgeResult],
+                                                               new string[] {insertedID.ToString(), l.Id.ToString(), l.Result.ToString() } );
+
+            DBDriver.Instance.InsertValues( SqlQueryList.Queries[(int)SqlQueryNum.AddEntrance],
+                                            new string[] { insertedID.ToString(), education.ToString(), birthDate } );
+            return true;
         }
 
         public bool Create_speciality(string specName, int eduForm, int numOfFree,  int numOfPaid, List<Exam> list )
@@ -148,28 +117,9 @@ namespace admission_office
             }
         }
 
-        public bool Create_subject(string subjName)
+        public bool Create_subject( string subjName )
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString.Connection))
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                connection.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
-                cmd.CommandText = "INSERT INTO `admission_office`.`subject` (`subject`) VALUES (@subject)";
-                cmd.Parameters.AddWithValue( "@subject", subjName );
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Ошибка");
-                    return false;
-                }
-                connection.Close();
-                return true;
-            }
+            return DBDriver.Instance.InsertValues( SqlQueryList.Queries[(int)SqlQueryNum.AddSubject], new string[] { subjName } );
         }
 
         public void Create_report()
@@ -257,7 +207,7 @@ namespace admission_office
 
         public static ComboBoxItem[] FillCB( string sql )
         {
-            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
+            using (MySqlConnection connection = new MySqlConnection( DBDriver.Instance.Connect))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
