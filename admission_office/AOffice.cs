@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using OfficeOpenXml;
 using System.Drawing;
 using System.Windows.Forms;
 //using Microsoft.Office.Interop.Excel;
@@ -77,7 +76,7 @@ namespace admission_office
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
                 //Получаем id записи в таблицы speciality у которой название совпадает с введенным
-                cmd.CommandText = SqlQuery.SqlQueries[(int)SqlQueryNum.SpecId];
+                cmd.CommandText = SqlQueryList.Queries[(int)SqlQueryNum.SpecId];
                 cmd.Parameters.AddWithValue( "@speciality", specName );
                 int specId;
                 try
@@ -206,7 +205,7 @@ namespace admission_office
                 connection.Open();
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connection;
-                cmd.CommandText = SqlQuery.SqlQueries[(int) SqlQueryNum.Report];
+                cmd.CommandText = SqlQueryList.Queries[(int) SqlQueryNum.Report];
                 cmd.ExecuteNonQuery();
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
                 System.Data.DataTable dt = new System.Data.DataTable();
@@ -254,18 +253,6 @@ namespace admission_office
             range2.Cells.Font.Color = ColorTranslator.ToOle( Color.Green );
             //Фоновый цвет
             range2.Interior.Color = ColorTranslator.ToOle( Color.FromArgb( 0xFF, 0xFF, 0xCC ) );
-        }
-
-        public void Create_report1()
-        {
-            //using (var excel = new ExcelPackage())
-            //{
-            //    var ws = Workbook.Worksheets.Add( "MyWorksheet" );
-
-            //    ws.Cells["A1"].Value = 100;
-            //    ws.Cells["A2"].Formula = "A1*2";
-            //    SaveAs( new FileInfo( "test.xlsx" ) );
-            //}
         }
 
         public static ComboBoxItem[] FillCB( string sql )
