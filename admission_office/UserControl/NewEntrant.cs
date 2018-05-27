@@ -31,7 +31,7 @@ namespace admission_office
             ucExam1.Dock = DockStyle.Fill;
             ucExam2.Dock = DockStyle.Fill;
             ucExam3.Dock = DockStyle.Fill;
-            cbSpec.Items.AddRange(AOffice.FillCB( SqlQueryList.Queries[(int)SqlQueryNum.EduSpec] ) );
+            cbSpec.Items.AddRange(DBDriver.Instance.SelectValuesToCB( SqlQueryList.Queries[(int)SqlQueryNum.EduSpec] ) );
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -57,11 +57,11 @@ namespace admission_office
                 else
                 {
                     List<Exam> listOfExam = new List<Exam>()
-                {
-                    new Exam((ucExam1.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam1.TbExamRes.Text)),
-                    new Exam((ucExam2.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam2.TbExamRes.Text)),
-                    new Exam((ucExam3.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam3.TbExamRes.Text))
-                };
+                    {
+                        new Exam((ucExam1.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam1.TbExamRes.Text)),
+                        new Exam((ucExam2.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam2.TbExamRes.Text)),
+                        new Exam((ucExam3.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam3.TbExamRes.Text))
+                    };
                     if (AOffice.Instance.Create_entrant( tbFirstName.Text,
                                                         tbLastname.Text, 
                                                         tbMiddleName.Text, 
