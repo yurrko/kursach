@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Drawing;
-using System.Windows.Forms;
-//using Microsoft.Office.Interop.Excel;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace admission_office
@@ -36,85 +33,25 @@ namespace admission_office
             return true;
         }
 
-        public bool Create_speciality(string specName, int eduForm, int numOfFree,  int numOfPaid, List<Exam> list )
+        public bool Create_speciality( string specName, int eduForm, int numOfFree, int numOfPaid, List<Exam> list )
         {
-            using (MySqlConnection connection = new MySqlConnection(ConnectionString.Connection))
-            {//
-                MySqlCommand cmd = new MySqlCommand();
-                connection.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
-                //Получаем id записи в таблицы speciality у которой название совпадает с введенным
-                cmd.CommandText = SqlQueryList.Queries[(int)SqlQueryNum.SpecId];
-                cmd.Parameters.AddWithValue( "@speciality", specName );
-                int specId;
-                try
-                {
-                    //Если возвращается null (таких записей нет), то преобразуется в 0.
-                    specId = Convert.ToInt32( cmd.ExecuteScalar() );
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show( ex.Message, "Ошибка" );
-                    return false;
-                }
+            int specId = DBDriver.Instance.SelectOneValue( SqlQueryList.Queries[(int)SqlQueryNum.SpecId],
+                                            new string[] { specName } );
 
-                if (specId == 0)/*Если id не вернулся, то такой специальности нет в БД. Создадим её*/
-                {
-                    cmd.CommandText =
-                        "INSERT INTO `admission_office`.`speciality` (`speciality`) VALUES( @specName )";
-                    cmd.Parameters.AddWithValue("@specName", specName);
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Ошибка");
-                        return false;
-                    }
-                    cmd.CommandText = "SELECT @@IDENTITY";
-                    specId = Convert.ToInt32(cmd.ExecuteScalar());
-                }
-
-                cmd.CommandText = 
-                    "INSERT INTO `admission_office`.`education` (`id_speciality`, `id_education_form`, `num_of_free_places`, `num_of_paid_places`) VALUES( @id_speciality, @id_education_from, @num_of_free, @num_of_paid)";
-                cmd.Parameters.AddWithValue( "@id_speciality", specId );
-                cmd.Parameters.AddWithValue( "@id_education_from", eduForm );
-                cmd.Parameters.AddWithValue( "@num_of_free", numOfFree );
-                cmd.Parameters.AddWithValue( "@num_of_paid", numOfPaid );
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show( ex.Message, "Ошибка" );
-                    return false;
-                }
-                cmd.CommandText = "SELECT @@IDENTITY";
-                specId = Convert.ToInt32( cmd.ExecuteScalar() );
-                cmd.CommandText =
-                    "INSERT INTO `admission_office`.`requirement` (`id_education`, `id_subject`, `min_requirement`) VALUES (@id_education, @id_subject, @min_requirement)";
-                foreach (var l in list)
-                {
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue( "@id_education", specId );
-                    cmd.Parameters.AddWithValue( "@id_subject", l.Id );
-                    cmd.Parameters.AddWithValue( "@min_requirement", l.Result );
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show( ex.Message, "Ошибка" );
-                        return false;
-                    }
-                }
-                connection.Close();
-                return true;
+            if (specId == -1)/*Если id не вернулся, то такой специальности нет в БД. Создадим её*/
+            {
+                specId = DBDriver.Instance.InsertValuesAndReceiveIdentity( SqlQueryList.Queries[(int)SqlQueryNum.AddSpeciality],
+                                                                    new string[] { specName } );
             }
+            int eduId = DBDriver.Instance.InsertValuesAndReceiveIdentity( SqlQueryList.Queries[(int)SqlQueryNum.AddEducation],
+                                                new string[] { specId.ToString(), eduForm.ToString(), numOfFree.ToString(), numOfPaid.ToString() } );
+
+            foreach (var l in list)
+            {
+                DBDriver.Instance.InsertValues( SqlQueryList.Queries[(int)SqlQueryNum.AddRequirement],
+                                                new string[] { eduId.ToString(), l.Id.ToString(), l.Result.ToString() } );
+            }
+            return true;
         }
 
         public bool Create_subject( string subjName )
@@ -126,9 +63,6 @@ namespace admission_office
         {
             //Объявляем приложение
             Excel.Application ex = new Microsoft.Office.Interop.Excel.Application();
-
-            //Отобразить Excel
-            ex.Visible = true;
 
             //Количество листов в рабочей книге
             ex.SheetsInNewWorkbook = 1;
@@ -176,16 +110,11 @@ namespace admission_office
                 }
                 connection.Close();
             }
-            //Данные
 
-            //for (int i = 1; i <= 9; i++)
-            //{
-            //    for (int j = 1; j < 9; j++)
-            //        sheet.Cells[i, j] = String.Format( "Boom {0} {1}", i, j );
-            //}
+            //Отобразить Excel
+            ex.Visible = true;
 
             //Захватываем диапазон ячеек
-
             Excel.Range range1 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 9]];
             //Excel.Range(sheet.Cells[1, 1], sheet.Cells[9, 9]);
 
@@ -203,30 +132,6 @@ namespace admission_office
             range2.Cells.Font.Color = ColorTranslator.ToOle( Color.Green );
             //Фоновый цвет
             range2.Interior.Color = ColorTranslator.ToOle( Color.FromArgb( 0xFF, 0xFF, 0xCC ) );
-        }
-
-        public static ComboBoxItem[] FillCB( string sql )
-        {
-            using (MySqlConnection connection = new MySqlConnection( DBDriver.Instance.Connect))
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                connection.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
-                System.Data.DataTable dt = new System.Data.DataTable();
-                dataAdapter.Fill( dt );
-                DataRow[] myData = dt.Select();
-                var dataToCombo = new ComboBoxItem[myData.Length];
-                for (int i = 0; i < myData.Length; i++)
-                {
-                    dataToCombo[i] = new ComboBoxItem( Convert.ToInt32( myData[i].ItemArray[0] ), myData[i].ItemArray[1].ToString() );
-                }
-                connection.Close();
-                return dataToCombo;
-            }
         }
     }
 }
