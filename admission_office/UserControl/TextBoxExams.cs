@@ -10,7 +10,7 @@ namespace admission_office
         public TextBoxExams(string str)
         {
             InitializeComponent();
-            cbExam.Items.AddRange( AOffice.FillCB( SqlQueryList.Queries[(int)SqlQueryNum.Subject] ) );
+            cbExam.Items.AddRange( DBDriver.Instance.SelectValuesToCB( SqlQueryList.Queries[(int)SqlQueryNum.Subject] ) );
             lblExam1.Text += str;
         }
 
