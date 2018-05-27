@@ -54,7 +54,6 @@
   <ItemGroup>
     <Compile Include="AOffice.cs" />
     <Compile Include="Supporting Classes\ComboBoxItem.cs" />
-    <Compile Include="Supporting Classes\ConnectionString.cs" />
     <Compile Include="Supporting Classes\DBDriver.cs" />
     <Compile Include="Supporting Classes\Exam.cs" />
     <Compile Include="LogAuthorize.cs" />
