@@ -20,14 +20,6 @@ namespace admission_office
         private readonly string[] _connStr = { "server=localhost;user=root;database=admission_office;password=12345687",
                                         "server=localhost;user=root;database=admission_office_archive;password=12345687" };
 
-        /*Начало. Удалить после полного переписования AOffice*/
-        //public string Connect
-
-        //{
-        //    get { return _connStr[0]; }
-        //}
-        /*Конец. Удалить после полного переписования AOffice*/
-
         public static int ConnectionNum { get; set; }
 
         public int SelectOneValue( string sql, string[] values )
@@ -78,6 +70,23 @@ namespace admission_office
                 }
                 connection.Close();
                 return dataToCombo;
+            }
+        }
+
+        public DataTable SelectValuesDataTable( string sql )
+        {
+            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum] ))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+                DataTable dt = new DataTable();
+                dataAdapter.Fill( dt );
+                return dt;
             }
         }
 

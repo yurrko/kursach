@@ -62,7 +62,7 @@ namespace admission_office
         public void Create_report()
         {
             //Объявляем приложение
-            Excel.Application ex = new Microsoft.Office.Interop.Excel.Application();
+            Excel.Application ex = new Excel.Application();
 
             //Количество листов в рабочей книге
             ex.SheetsInNewWorkbook = 1;
@@ -80,27 +80,14 @@ namespace admission_office
             var dateTime = DateTime.Today;
             sheet.Name = "Отчет от " + dateTime.Date.ToShortDateString();
 
-            //Пример заполнения ячеек
-
             //Данные для Excel
-            using (MySqlConnection connection = new MySqlConnection( ConnectionString.Connection ))
-            {
-                MySqlCommand cmd = new MySqlCommand();
-                connection.Open();
-                cmd.CommandType = CommandType.Text;
-                cmd.Connection = connection;
-                cmd.CommandText = SqlQueryList.Queries[(int) SqlQueryNum.Report];
-                cmd.ExecuteNonQuery();
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
-                System.Data.DataTable dt = new System.Data.DataTable();
-                dataAdapter.Fill( dt );
+            var dt = DBDriver.Instance.SelectValuesDataTable( SqlQueryList.Queries[(int)SqlQueryNum.Report] );
+
                 for (int i = 0; i < dt.Columns.Count; i++)
                 {
                     sheet.Cells[1, i + 1] = String.Format("{0}", dt.Columns[i]);
                 }
                 
-                //dt.Columns[]
-
                 DataRow[] myDataRows = dt.Select();
                 var dataToCombo = new ComboBoxItem[myDataRows.Length];
                 for (int i = 0; i < myDataRows.Length; i++)
@@ -108,30 +95,27 @@ namespace admission_office
                     for (int j = 0; j < myDataRows[i].ItemArray.Length; j++)
                         sheet.Cells[i+2, j+1] = String.Format( "{0}", myDataRows[i].ItemArray[j] );
                 }
-                connection.Close();
-            }
 
             //Отобразить Excel
             ex.Visible = true;
 
-            //Захватываем диапазон ячеек
-            Excel.Range range1 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 9]];
-            //Excel.Range(sheet.Cells[1, 1], sheet.Cells[9, 9]);
+            ////Захватываем диапазон ячеек
+            //Excel.Range range1 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 9]];
+            ////Excel.Range(sheet.Cells[1, 1], sheet.Cells[9, 9]);
 
+            ////Шрифт для диапазона
+            //range1.Cells.Font.Name = "Tahoma";
+            ////Размер шрифта для диапазона
+            //range1.Cells.Font.Size = 10;
 
-            //Шрифт для диапазона
-            range1.Cells.Font.Name = "Tahoma";
-            //Размер шрифта для диапазона
-            range1.Cells.Font.Size = 10;
+            ////Захватываем другой диапазон ячеек
+            //Excel.Range range2 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 2]];
+            //range2.Cells.Font.Name = "Times New Roman";
 
-            //Захватываем другой диапазон ячеек
-            Excel.Range range2 = sheet.Range[sheet.Cells[1, 1], sheet.Cells[9, 2]];
-            range2.Cells.Font.Name = "Times New Roman";
-
-            //Задаем цвет этого диапазона. Необходимо подключить System.Drawing
-            range2.Cells.Font.Color = ColorTranslator.ToOle( Color.Green );
-            //Фоновый цвет
-            range2.Interior.Color = ColorTranslator.ToOle( Color.FromArgb( 0xFF, 0xFF, 0xCC ) );
+            ////Задаем цвет этого диапазона. Необходимо подключить System.Drawing
+            //range2.Cells.Font.Color = ColorTranslator.ToOle( Color.Green );
+            ////Фоновый цвет
+            //range2.Interior.Color = ColorTranslator.ToOle( Color.FromArgb( 0xFF, 0xFF, 0xCC ) );
         }
     }
 }
