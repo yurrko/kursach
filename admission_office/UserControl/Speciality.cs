@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace admission_office
@@ -67,10 +61,9 @@ namespace admission_office
                         new Exam(ucExam2.CbExam.SelectedIndex + 1, int.Parse(ucExam2.TbExamRes.Text)),
                         new Exam(ucExam3.CbExam.SelectedIndex + 1, int.Parse(ucExam3.TbExamRes.Text))
                     };
-                    if (AOffice.Instance.Create_speciality( tbSpec.Text, (cbDaily.Checked) ? 1 : 0, int.Parse(mtbFree.Text), int.Parse(mtbPaid.Text), list)) Clear();
+                    if (AOffice.Instance.Create_speciality( tbSpec.Text, (cbDaily.Checked) ? 1 : 2, int.Parse(mtbFree.Text), int.Parse(mtbPaid.Text), list)) Clear();
                 }
             }
-           
         }
 
         private void Clear()

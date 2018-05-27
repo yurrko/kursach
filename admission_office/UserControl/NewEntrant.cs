@@ -31,18 +31,17 @@ namespace admission_office
             ucExam1.Dock = DockStyle.Fill;
             ucExam2.Dock = DockStyle.Fill;
             ucExam3.Dock = DockStyle.Fill;
+            cbSpec.Items.AddRange(DBDriver.Instance.SelectValuesToCB( SqlQueryList.Queries[(int)SqlQueryNum.EduSpec] ) );
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (tbFirstName.Text.Length == 0
                 || tbLastname.Text.Length == 0
-                || ucExam1.CbExam.SelectedIndex == -1
-                || ucExam2.CbExam.SelectedIndex == -1
-                || ucExam3.CbExam.SelectedIndex == -1
-                || ucExam1.TbExamRes.Text.Length == 0
-                || ucExam2.TbExamRes.Text.Length == 0
-                || ucExam3.TbExamRes.Text.Length == 0
+                || ucExam1.CheckFill()
+                || ucExam2.CheckFill()
+                || ucExam3.CheckFill()
+                || cbSpec.SelectedIndex == -1
             )
             {
                 MessageBox.Show("Заполните все обязательные поля", "Ошибка");
@@ -57,13 +56,19 @@ namespace admission_office
                 }
                 else
                 {
-                    List<Exam> list = new List<Exam>()
-                {
-                    new Exam(ucExam1.CbExam.SelectedIndex + 1, int.Parse(ucExam1.TbExamRes.Text)),
-                    new Exam(ucExam2.CbExam.SelectedIndex + 1, int.Parse(ucExam2.TbExamRes.Text)),
-                    new Exam(ucExam3.CbExam.SelectedIndex + 1, int.Parse(ucExam3.TbExamRes.Text))
-                };
-                if (AOffice.Instance.Create_entrant(tbFirstName.Text, tbLastname.Text, tbMiddleName.Text, dtpBirthdate.Text, list)) Clear();
+                    List<Exam> listOfExam = new List<Exam>()
+                    {
+                        new Exam((ucExam1.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam1.TbExamRes.Text)),
+                        new Exam((ucExam2.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam2.TbExamRes.Text)),
+                        new Exam((ucExam3.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam3.TbExamRes.Text))
+                    };
+                    if (AOffice.Instance.Create_entrant( tbFirstName.Text,
+                                                        tbLastname.Text, 
+                                                        tbMiddleName.Text, 
+                                                        dtpBirthdate.Text, 
+                                                        listOfExam, 
+                                                        (cbSpec.SelectedItem as ComboBoxItem).Value))
+                        Clear();
                 }
             }
         }
@@ -73,10 +78,10 @@ namespace admission_office
             tbFirstName.Text = "";
             tbMiddleName.Text = "";
             tbLastname.Text = "";
-            dtpBirthdate.Text = "";
             ucExam1.Clear();
             ucExam2.Clear();
             ucExam3.Clear();
+            cbSpec.SelectedIndex=-1;
         }
     }
 }

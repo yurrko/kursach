@@ -40,13 +40,15 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.lblSpec = new System.Windows.Forms.Label();
+            this.cbSpec = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // dtpBirthdate
             // 
             this.dtpBirthdate.CustomFormat = "yyyy.MM.dd";
             this.dtpBirthdate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpBirthdate.Location = new System.Drawing.Point(20, 209);
+            this.dtpBirthdate.Location = new System.Drawing.Point(20, 203);
             this.dtpBirthdate.Name = "dtpBirthdate";
             this.dtpBirthdate.Size = new System.Drawing.Size(116, 22);
             this.dtpBirthdate.TabIndex = 28;
@@ -139,10 +141,30 @@
             this.panel3.Size = new System.Drawing.Size(200, 45);
             this.panel3.TabIndex = 39;
             // 
+            // lblSpec
+            // 
+            this.lblSpec.AutoSize = true;
+            this.lblSpec.Location = new System.Drawing.Point(169, 178);
+            this.lblSpec.Name = "lblSpec";
+            this.lblSpec.Size = new System.Drawing.Size(109, 17);
+            this.lblSpec.TabIndex = 40;
+            this.lblSpec.Text = "Специальность";
+            // 
+            // cbSpec
+            // 
+            this.cbSpec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSpec.FormattingEnabled = true;
+            this.cbSpec.Location = new System.Drawing.Point(169, 202);
+            this.cbSpec.Name = "cbSpec";
+            this.cbSpec.Size = new System.Drawing.Size(200, 24);
+            this.cbSpec.TabIndex = 41;
+            // 
             // NewEntrant
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbSpec);
+            this.Controls.Add(this.lblSpec);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -175,5 +197,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lblSpec;
+        private System.Windows.Forms.ComboBox cbSpec;
     }
 }
