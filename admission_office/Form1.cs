@@ -4,6 +4,7 @@ using System.Windows.Forms;
 namespace admission_office
 {
     delegate void ClickDelegate();
+
     public partial class Form1 : Form
     {
         ClickDelegate cd;
@@ -28,21 +29,21 @@ namespace admission_office
 
         private void Authorize()
         {
-            if (Check())
-            {
-                var userRole = _logAuto.Authorize( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex );
-                if (userRole != -1)
-                {
+            //if (Check())
+            //{
+            //    var userRole = _logAuto.Authorize( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex );
+            //    if (userRole != -1)
+            //    {
                     Hide();
                     Clear();
-                    Role = userRole;
-                    program.setAccess();
+                    //Role = userRole;
+                    //program.setAccess();
                     program.ShowDialog();
                     Register_mode();
-                }
-                else
-                    MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
-            }
+            //    }
+            //    else
+            //        MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
+            //}
         }
 
         private void Register()
