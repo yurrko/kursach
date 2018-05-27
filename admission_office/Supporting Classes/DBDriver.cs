@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data;
@@ -22,11 +21,11 @@ namespace admission_office
                                         "server=localhost;user=root;database=admission_office_archive;password=12345687" };
 
         /*Начало. Удалить после полного переписования AOffice*/
-        public string Connect
+        //public string Connect
 
-        {
-            get { return _connStr[0]; }
-        }
+        //{
+        //    get { return _connStr[0]; }
+        //}
         /*Конец. Удалить после полного переписования AOffice*/
 
         public static int ConnectionNum { get; set; }
@@ -55,6 +54,30 @@ namespace admission_office
                 }
                 connection.Close();
                 return result;
+            }
+        }
+
+        public ComboBoxItem[] SelectValuesToCB (string sql)
+        {
+            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum] ))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+                System.Data.DataTable dt = new System.Data.DataTable();
+                dataAdapter.Fill( dt );
+                DataRow[] myData = dt.Select();
+                var dataToCombo = new ComboBoxItem[myData.Length];
+                for (int i = 0; i < myData.Length; i++)
+                {
+                    dataToCombo[i] = new ComboBoxItem( Convert.ToInt32( myData[i].ItemArray[0] ), myData[i].ItemArray[1].ToString() );
+                }
+                connection.Close();
+                return dataToCombo;
             }
         }
 
@@ -105,7 +128,6 @@ namespace admission_office
                 catch (Exception ex)
                 {
                     MessageBox.Show( ex.Message, "Ошибка" );
-                    //return false;
                 }
                 cmd.CommandText = "SELECT @@IDENTITY";
                 int lastId = Convert.ToInt32( cmd.ExecuteScalar() );

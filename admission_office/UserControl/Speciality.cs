@@ -64,7 +64,6 @@ namespace admission_office
                     if (AOffice.Instance.Create_speciality( tbSpec.Text, (cbDaily.Checked) ? 1 : 2, int.Parse(mtbFree.Text), int.Parse(mtbPaid.Text), list)) Clear();
                 }
             }
-           
         }
 
         private void Clear()
