@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.IO;
+using System.Collections.Generic;
 
 namespace admission_office
 {
@@ -13,18 +15,36 @@ namespace admission_office
         {
             get
             {
-                if (_instance == null) _instance = new DBDriver();
+                if (_instance == null)
+                {
+                    _instance = new DBDriver();
+                    _instance.connStr = _instance.ReadConnectionString();
+                }
                 return _instance;
             }
         }
-        private readonly string[] _connStr = { "server=localhost;user=root;database=admission_office;password=12345687",
-                                        "server=localhost;user=root;database=admission_office_archive;password=12345687" };
+
+        private List<string> connStr;
+
+        //private readonly string[] connStr = { "server=localhost;user=root;database=admission_office;password=12345687",
+        //                                "server=localhost;user=root;database=admission_office_archive;password=12345687" };
+
+        private List<string> ReadConnectionString()
+        {
+            connStr = new List<string>();
+            StreamReader sr = new StreamReader( "connection_string.txt" );
+            while (!sr.EndOfStream)
+            {
+                connStr.Add( sr.ReadLine() );
+            }
+            return connStr;
+        }
 
         public static int ConnectionNum { get; set; }
 
         public int SelectOneValue( string sql, string[] values )
         {
-            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum] ))
+            using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum] ))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
@@ -51,7 +71,7 @@ namespace admission_office
 
         public ComboBoxItem[] SelectValuesToCB (string sql)
         {
-            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum] ))
+            using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum] ))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
@@ -75,7 +95,7 @@ namespace admission_office
 
         public DataTable SelectValuesDataTable( string sql )
         {
-            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum] ))
+            using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum] ))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
@@ -92,7 +112,7 @@ namespace admission_office
 
         public bool InsertValues( string sql, string[] values )
         {
-            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum]))
+            using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum]))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
@@ -119,7 +139,7 @@ namespace admission_office
 
         public int InsertValuesAndReceiveIdentity( string sql, string[] values )
         {
-            using (MySqlConnection connection = new MySqlConnection( _connStr[ConnectionNum] ))
+            using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum] ))
             {
                 MySqlCommand cmd = new MySqlCommand();
                 connection.Open();
