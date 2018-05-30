@@ -110,6 +110,23 @@ namespace admission_office
             }
         }
 
+        public DataSet SelectValuesDataSet( string sql )
+        {
+            using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum] ))
+            {
+                MySqlCommand cmd = new MySqlCommand();
+                connection.Open();
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connection;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
+                DataSet ds = new DataSet();
+                dataAdapter.Fill( ds );
+                return ds;
+            }
+        }
+
         public bool InsertValues( string sql, string[] values )
         {
             using (MySqlConnection connection = new MySqlConnection( connStr[ConnectionNum]))
