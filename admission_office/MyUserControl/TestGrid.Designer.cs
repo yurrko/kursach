@@ -36,20 +36,22 @@
             // 
             this.dgvEntrants.AllowUserToOrderColumns = true;
             this.dgvEntrants.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvEntrants.Location = new System.Drawing.Point(3, 3);
+            this.dgvEntrants.Location = new System.Drawing.Point(30, 23);
             this.dgvEntrants.Name = "dgvEntrants";
             this.dgvEntrants.RowTemplate.Height = 24;
             this.dgvEntrants.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvEntrants.Size = new System.Drawing.Size(988, 526);
+            this.dgvEntrants.Size = new System.Drawing.Size(1080, 280);
             this.dgvEntrants.TabIndex = 0;
             // 
             // TestGrid
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.dgvEntrants);
             this.Name = "TestGrid";
-            this.Size = new System.Drawing.Size(994, 532);
+            this.Size = new System.Drawing.Size(1113, 306);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEntrants)).EndInit();
             this.ResumeLayout(false);
 

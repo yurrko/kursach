@@ -42,6 +42,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel = new System.Windows.Forms.Panel();
+            this.таблицаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,7 +74,8 @@
             // абитуриентыToolStripMenuItem
             // 
             this.абитуриентыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.создатьToolStripMenuItem});
+            this.создатьToolStripMenuItem,
+            this.таблицаToolStripMenuItem});
             this.абитуриентыToolStripMenuItem.Name = "абитуриентыToolStripMenuItem";
             this.абитуриентыToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.абитуриентыToolStripMenuItem.Text = "Абитуриенты";
@@ -81,7 +83,7 @@
             // создатьToolStripMenuItem
             // 
             this.создатьToolStripMenuItem.Name = "создатьToolStripMenuItem";
-            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(139, 26);
+            this.создатьToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.создатьToolStripMenuItem.Text = "Создать";
             this.создатьToolStripMenuItem.Click += new System.EventHandler(this.создатьToolStripMenuItem_Click);
             // 
@@ -151,21 +153,34 @@
             // 
             // panel
             // 
+            this.panel.AutoSize = true;
+            this.panel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.panel.Location = new System.Drawing.Point(13, 32);
+            this.panel.MinimumSize = new System.Drawing.Size(400, 310);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(396, 307);
+            this.panel.Size = new System.Drawing.Size(400, 310);
             this.panel.TabIndex = 3;
+            // 
+            // таблицаToolStripMenuItem
+            // 
+            this.таблицаToolStripMenuItem.Name = "таблицаToolStripMenuItem";
+            this.таблицаToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.таблицаToolStripMenuItem.Text = "Таблица";
+            this.таблицаToolStripMenuItem.Click += new System.EventHandler(this.таблицаToolStripMenuItem_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(421, 351);
             this.Controls.Add(this.panel);
             this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Приемная комиссия";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.menuStrip.ResumeLayout(false);
@@ -190,5 +205,6 @@
         private System.Windows.Forms.ToolStripMenuItem отчётToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пользователиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem таблицаToolStripMenuItem;
     }
 }

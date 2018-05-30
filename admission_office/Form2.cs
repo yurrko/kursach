@@ -19,8 +19,10 @@ namespace admission_office
         {
             if (!panel.Controls.Contains(NewEntrant.Instance))
             {
+                //panel.Controls.Remove(TestGrid.Instance);
                 panel.Controls.Add(NewEntrant.Instance);
                 NewEntrant.Instance.Dock = DockStyle.Fill;
+
             }
             NewEntrant.Instance.BringToFront();
         }
@@ -61,7 +63,7 @@ namespace admission_office
             Visible = false;
         }
 
-        public void setAccess()
+        public void SetAccess()
         {
             Role = (Owner as Form1).Role;
             switch (Role)
@@ -78,6 +80,16 @@ namespace admission_office
                 default:
                     break;
             }
+        }
+
+        private void таблицаToolStripMenuItem_Click( object sender, System.EventArgs e )
+        {
+            if (!panel.Controls.Contains( TestGrid.Instance ))
+            {
+                panel.Controls.Add( TestGrid.Instance );
+                TestGrid.Instance.Dock = DockStyle.Fill;
+            }
+            TestGrid.Instance.BringToFront();
         }
     }
 }
