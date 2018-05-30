@@ -70,30 +70,36 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Supporting Classes\SqlQuery.cs" />
-    <Compile Include="UserControl\NewEntrant.cs">
+    <Compile Include="MyUserControl\NewEntrant.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\NewEntrant.Designer.cs">
+    <Compile Include="MyUserControl\NewEntrant.Designer.cs">
       <DependentUpon>NewEntrant.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl\Speciality.cs">
+    <Compile Include="MyUserControl\Speciality.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\Speciality.Designer.cs">
+    <Compile Include="MyUserControl\Speciality.Designer.cs">
       <DependentUpon>Speciality.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\Subject.cs">
+    <Compile Include="MyUserControl\Subject.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\Subject.Designer.cs">
+    <Compile Include="MyUserControl\Subject.Designer.cs">
       <DependentUpon>Subject.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControl\TextBoxExams.cs">
+    <Compile Include="MyUserControl\TestGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControl\TextBoxExams.Designer.cs">
+    <Compile Include="MyUserControl\TestGrid.Designer.cs">
+      <DependentUpon>TestGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyUserControl\TextBoxExams.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyUserControl\TextBoxExams.Designer.cs">
       <DependentUpon>TextBoxExams.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
@@ -102,7 +108,7 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControl\NewEntrant.resx">
+    <EmbeddedResource Include="MyUserControl\NewEntrant.resx">
       <DependentUpon>NewEntrant.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -114,13 +120,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserControl\Speciality.resx">
+    <EmbeddedResource Include="MyUserControl\Speciality.resx">
       <DependentUpon>Speciality.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControl\Subject.resx">
+    <EmbeddedResource Include="MyUserControl\Subject.resx">
       <DependentUpon>Subject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControl\TextBoxExams.resx">
+    <EmbeddedResource Include="MyUserControl\TestGrid.resx">
+      <DependentUpon>TestGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyUserControl\TextBoxExams.resx">
       <DependentUpon>TextBoxExams.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
