@@ -26,9 +26,6 @@ namespace admission_office
 
         private List<string> connStr;
 
-        //private readonly string[] connStr = { "server=localhost;user=root;database=admission_office;password=12345687",
-        //                                "server=localhost;user=root;database=admission_office_archive;password=12345687" };
-
         private List<string> ReadConnectionString()
         {
             connStr = new List<string>();
@@ -80,7 +77,7 @@ namespace admission_office
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter( cmd );
-                System.Data.DataTable dt = new System.Data.DataTable();
+                DataTable dt = new DataTable();
                 dataAdapter.Fill( dt );
                 DataRow[] myData = dt.Select();
                 var dataToCombo = new ComboBoxItem[myData.Length];

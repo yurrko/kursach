@@ -33,11 +33,11 @@ namespace admission_office
 
         private void btnSave_Click( object sender, EventArgs e )
         {
-            if(tbSpec.Text.Length == 0 
-               && mtbFree.Text.Length == 0 
-               && ucExam1.TbExamRes.Text.Length == 0
-               && ucExam2.TbExamRes.Text.Length == 0
-               && ucExam3.TbExamRes.Text.Length == 0
+            if(   String.IsNullOrEmpty(tbSpec.Text)
+               && String.IsNullOrEmpty(mtbFree.Text)
+               && String.IsNullOrEmpty(ucExam1.TbExamRes.Text)
+               && String.IsNullOrEmpty(ucExam2.TbExamRes.Text)
+               && String.IsNullOrEmpty(ucExam3.TbExamRes.Text)
                && ucExam1.CbExam.SelectedIndex == -1
                && ucExam2.CbExam.SelectedIndex == -1
                && ucExam3.CbExam.SelectedIndex == -1

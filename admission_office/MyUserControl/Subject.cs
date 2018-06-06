@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace admission_office
 {
@@ -26,7 +27,7 @@ namespace admission_office
 
         private void btnSave_Click( object sender, System.EventArgs e )
         {
-            if (tbSubject.Text.Length != 0)
+            if (!String.IsNullOrEmpty( tbSubject.Text )) 
                 if (AOffice.Instance.Create_subject(tbSubject.Text))
                     Clear();
         }

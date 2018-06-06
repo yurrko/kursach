@@ -24,7 +24,7 @@ namespace admission_office
             if (number == 8) return true;
             if (Char.IsDigit( number ))
             {
-                if (value.Length != 0)
+                if (!String.IsNullOrEmpty( value )) 
                 {
                     return (int.Parse( value ) * 10 + int.Parse( number.ToString() )) <= 100;
                 }
@@ -43,7 +43,7 @@ namespace admission_office
 
         public bool CheckFill()
         {
-            return (cbExam.SelectedIndex == -1 || tbExamRes.Text.Length == 0);
+            return (cbExam.SelectedIndex == -1 || String.IsNullOrEmpty( tbExamRes.Text ));
         }
 
         public void Clear()

@@ -36,8 +36,8 @@ namespace admission_office
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (tbFirstName.Text.Length == 0
-                || tbLastname.Text.Length == 0
+            if (String.IsNullOrEmpty( tbFirstName.Text )
+                || String.IsNullOrEmpty( tbLastname.Text )
                 || ucExam1.CheckFill()
                 || ucExam2.CheckFill()
                 || ucExam3.CheckFill()

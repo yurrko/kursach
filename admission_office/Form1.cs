@@ -29,21 +29,21 @@ namespace admission_office
 
         private void Authorize()
         {
-            //if (Check())
-            //{
-            //    var userRole = _logAuto.Authorize( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex );
-            //    if (userRole != -1)
-            //    {
+            if (Check())
+            {
+                var userRole = _logAuto.Authorize( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex );
+                if (userRole != -1)
+                {
                     Hide();
                     Clear();
-                    //Role = userRole;
-                    //program.setAccess();
+                    Role = userRole;
+                    program.SetAccess();
                     program.ShowDialog();
                     Register_mode();
-            //    }
-            //    else
-            //        MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
-            //}
+                }
+                else
+                    MessageBox.Show( "Неверный логин/пароль", "Ошибка" );
+            }
         }
 
         private void Register()
@@ -74,7 +74,7 @@ namespace admission_office
 
         private bool Check()
         {
-            if (tbLogin.Text.Length == 0 && tbPass.Text.Length == 0)
+            if (String.IsNullOrEmpty( tbLogin.Text ) && String.IsNullOrEmpty( tbPass.Text ))
             {
                 MessageBox.Show( "Логин или пароль не могут быть пустыми", "Предупреждение" );
                 return false;
