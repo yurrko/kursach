@@ -9,7 +9,6 @@ namespace admission_office
     {
         ClickDelegate cd;
         Form2 program = new Form2();
-        private LogAuthorize _logAuto = new LogAuthorize();
         public int Role { get; set; }
         public Form1()
         {
@@ -31,7 +30,7 @@ namespace admission_office
         {
             if (Check())
             {
-                var userRole = _logAuto.Authorize( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex );
+                var userRole = LogAuthorize.Authorize( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex );
                 if (userRole != -1)
                 {
                     Hide();
@@ -50,7 +49,7 @@ namespace admission_office
         {
             if (Check())
             {
-                if (_logAuto.Register( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex.ToString() ))
+                if (LogAuthorize.Register( tbLogin.Text, tbPass.Text, cbSelectDB.SelectedIndex.ToString() ))
                 {
                     MessageBox.Show( "Пользователь зарегистрирован", "Сообщение" );
                     Clear();

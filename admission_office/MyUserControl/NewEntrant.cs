@@ -62,7 +62,7 @@ namespace admission_office
                         new Exam((ucExam2.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam2.TbExamRes.Text)),
                         new Exam((ucExam3.CbExam.SelectedItem as ComboBoxItem).Value, int.Parse(ucExam3.TbExamRes.Text))
                     };
-                    if (AOffice.Instance.Create_entrant( tbFirstName.Text,
+                    if (AOffice.Create_entrant( tbFirstName.Text,
                                                         tbLastname.Text, 
                                                         tbMiddleName.Text, 
                                                         dtpBirthdate.Text, 

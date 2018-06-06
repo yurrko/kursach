@@ -28,7 +28,7 @@ namespace admission_office
         private void btnSave_Click( object sender, System.EventArgs e )
         {
             if (!String.IsNullOrEmpty( tbSubject.Text )) 
-                if (AOffice.Instance.Create_subject(tbSubject.Text))
+                if (AOffice.Create_subject(tbSubject.Text))
                     Clear();
         }
     }

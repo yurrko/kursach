@@ -7,20 +7,9 @@ using System.Windows.Forms;
 
 namespace admission_office
 {
-    class LogAuthorize
+    static class LogAuthorize
     {
-        private static LogAuthorize _instance;
-
-        public static LogAuthorize Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new LogAuthorize();
-                return _instance;
-            }
-        }
-
-        public int Authorize( string login, string password, int DBNum )
+        public static int Authorize( string login, string password, int DBNum )
         {
             using (MD5 md5Hash = MD5.Create())
             {
@@ -35,7 +24,7 @@ namespace admission_office
             }
         }
 
-        public bool Register( string login, string password, string role )
+        public static bool Register( string login, string password, string role )
         {
             using (MD5 md5Hash = MD5.Create())
             {
@@ -44,14 +33,14 @@ namespace admission_office
             }
         }
 
-        private void Log( string login, string result )
+        private static void Log( string login, string result )
         {
             var date = String.Format( "{0:s}", DateTime.Now );
             DBDriver.Instance.InsertValues( SqlQueryList.Queries[(int)SqlQueryNum.Log],
                                             new string[] { date, login, result } );
         }
 
-        private string Encrypt( MD5 md5Hash, string input )
+        private static string Encrypt( MD5 md5Hash, string input )
         {
             byte[] data = md5Hash.ComputeHash( Encoding.UTF8.GetBytes( input ) );
             StringBuilder sBuilder = new StringBuilder();

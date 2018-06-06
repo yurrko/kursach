@@ -54,7 +54,7 @@ namespace admission_office
 
         private void отчётToolStripMenuItem_Click( object sender, System.EventArgs e )
         {
-            AOffice.Instance.Create_report();
+            AOffice.Create_report();
         }
 
         private void добавитьToolStripMenuItem_Click( object sender, System.EventArgs e )

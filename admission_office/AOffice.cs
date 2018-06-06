@@ -7,20 +7,9 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace admission_office
 {
-    class AOffice
+    static class AOffice
     {
-        private static AOffice _instance;
-
-        public static AOffice Instance
-        {
-            get
-            {
-                if (_instance == null) _instance = new AOffice();
-                return _instance;
-            }
-        }
-
-        public bool Create_entrant( string firstName, string lastName, string middleName, string birthDate, List<Exam> list, int education)
+        public static bool Create_entrant( string firstName, string lastName, string middleName, string birthDate, List<Exam> list, int education)
         {
             int insertedID = DBDriver.Instance.InsertValuesAndReceiveIdentity( SqlQueryList.Queries[(int)SqlQueryNum.AddEntrant],
                                                                 new string[] { firstName, lastName, middleName, birthDate } );
@@ -33,7 +22,7 @@ namespace admission_office
             return true;
         }
 
-        public bool Create_speciality( string specName, int eduForm, int numOfFree, int numOfPaid, List<Exam> list )
+        public static bool Create_speciality( string specName, int eduForm, int numOfFree, int numOfPaid, List<Exam> list )
         {
             int specId = DBDriver.Instance.SelectOneValue( SqlQueryList.Queries[(int)SqlQueryNum.SpecId],
                                             new string[] { specName } );
@@ -54,12 +43,12 @@ namespace admission_office
             return true;
         }
 
-        public bool Create_subject( string subjName )
+        public static bool Create_subject( string subjName )
         {
             return DBDriver.Instance.InsertValues( SqlQueryList.Queries[(int)SqlQueryNum.AddSubject], new string[] { subjName } );
         }
 
-        public void Create_report()
+        public static void Create_report()
         {
             //Объявляем приложение
             Excel.Application ex = new Excel.Application();
