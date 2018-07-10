@@ -18,23 +18,27 @@ namespace admission_office
                 if (_instance == null)
                 {
                     _instance = new DBDriver();
-                    _instance.connStr = _instance.ReadConnectionString();
                 }
                 return _instance;
             }
         }
 
-        private List<string> connStr;
+        private static readonly List<string> connStr;
 
-        private List<string> ReadConnectionString()
+        private static List<string> ReadConnectionString()
         {
-            connStr = new List<string>();
             StreamReader sr = new StreamReader( "connection_string.txt" );
             while (!sr.EndOfStream)
             {
                 connStr.Add( sr.ReadLine() );
             }
             return connStr;
+        }
+
+        static DBDriver()
+        {
+            connStr = new List<string>();
+            connStr = ReadConnectionString();
         }
 
         public static int ConnectionNum { get; set; }
