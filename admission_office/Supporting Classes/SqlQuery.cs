@@ -21,7 +21,7 @@
             "INSERT INTO `admission_office`.`speciality` (`speciality`) VALUES( @0 )",
             "INSERT INTO `admission_office`.`education` (`id_speciality`, `id_education_form`, `num_of_free_places`, `num_of_paid_places`) VALUES( @0, @1, @2, @3)",
             "INSERT INTO `admission_office`.`requirement` (`id_education`, `id_subject`, `min_requirement`) VALUES (@0, @1, @2)"
-    };
+        };
     }
     enum SqlQueryNum
     {
